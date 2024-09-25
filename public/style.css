@@ -1,55 +1,4 @@
-.instagram {
-    background: transparent;
-    position: relative;
-    padding: 5px 15px;
-    display: flex;
-    align-items: center;
-    font-size: 17px;
-    font-weight: 600;
-    text-decoration: none;
-    cursor: pointer;
-    border: 1px solid rgb(255,0,0);
-    border-radius: 25px;
-    outline: none;
-    overflow: hidden;
-    color: rgb(255,0,0);
-    transition: color 0.3s 0.1s ease-out;
-    text-align: center;
-  }
-  
-  .instagram span {
-    margin: 10px;
-  }
-  
-  .instagram::before {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    margin: auto;
-    content: '';
-    border-radius: 50%;
-    display: block;
-    width: 20em;
-    height: 20em;
-    left: -5em;
-    text-align: center;
-    transition: box-shadow 0.5s ease-out;
-    z-index: -1;
-  }
-  
-  .instagram:hover {
-    color: #fff;
-    border: 1px solid rgb(255,0,0);
-  }
-  
-  .instagram:hover::before {
-    box-shadow: inset 0 0 0 10em rgb(255, 0, 0);
-  }
 
-
-/* Estilos del cuerpo y fondo */
 body {
     background-color: #000;
     font-family: 'Courier New', Courier, monospace;
@@ -62,7 +11,6 @@ body {
     height: 100vh;
 }
 
-/* Contenedor del chat */
 .chat-container {
     width: 800px;
     background-color: #111;
@@ -72,7 +20,6 @@ body {
     box-shadow: 0 0 10px #8A2BE2;
 }
 
-/* Cuadro donde aparecen los mensajes */
 .chat-box {
     height: 400px;
     overflow-y: auto;
@@ -80,7 +27,7 @@ body {
     border-bottom: 2px solid #8A2BE2;
 }
 
-/* Estilo de cada mensaje */
+
 .message {
     margin: 5px 0;
     background-color: #333;
@@ -89,13 +36,13 @@ body {
     color: #8A2BE2;
 }
 
-/* Input y botón de envío */
+
 .chat-input {
     display: flex;
     border-top: 2px solid #8A2BE2;
 }
 
-#message-input {
+#messageInput {
     flex: 1;
     background-color: #222;
     border: none;
@@ -120,3 +67,61 @@ body {
 #send-button:hover {
     background-color: #5e1e9e;
 }
+
+
+
+/* From Uiverse.io by adamgiebl */ 
+.sendButton {
+    font-family: inherit;
+    font-size: 20px;
+    background: royalblue;
+    color: white;
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+  }
+  
+  .sendButton span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+  }
+  
+  .sendButton svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+  }
+  
+  .sendButton:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+  }
+  
+  .sendButton:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+  }
+  
+  .sendButton:hover span {
+    transform: translateX(5em);
+  }
+  
+  .sendButton:active {
+    transform: scale(0.95);
+  }
+  
+  @keyframes fly-1 {
+    from {
+      transform: translateY(0.1em);
+    }
+  
+    to {
+      transform: translateY(-0.1em);
+    }
+  }
+  

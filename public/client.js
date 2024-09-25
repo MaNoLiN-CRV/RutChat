@@ -4,6 +4,18 @@ const messagesDiv = document.getElementById('messages');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
 
+
+document.addEventListener('DOMContentLoaded', () => {
+    let username = '';
+
+    while (username.trim() === '') {
+        username = prompt('Username: ');
+    }
+
+    socket.emit('username', username);
+});
+
+
 // Enviar mensaje al servidor
 function sendMessage(){
     const message = messageInput.value; 
@@ -12,6 +24,8 @@ function sendMessage(){
         messageInput.value = ''; 
     }
 }
+
+
 sendButton.addEventListener('click', () => {
     const message = messageInput.value; 
     if (message) {
@@ -20,7 +34,7 @@ sendButton.addEventListener('click', () => {
     }
 });
 
-// Recibir mensajes del servidor
+
 socket.on('message', (message) => {
     const newMessage = document.createElement('div'); 
     newMessage.textContent = message; 
