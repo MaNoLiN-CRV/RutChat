@@ -5,9 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon src/server.ts"
-    
+
   },
-  "author": "",
+  "author": "MaNoLiN-CRV",
   "license": "ISC",
   "description": "",
   "dependencies": {
