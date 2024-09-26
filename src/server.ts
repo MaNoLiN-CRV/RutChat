@@ -17,7 +17,7 @@ const io = new Server(httpServer);
 app.use(express.static('public'));
 
 function welcome():string{
-    return "Server: Welcome to RutChat by MaNoLiN !!! Refresh the page to choose username "
+    return "Server: Welcome to RutChat by MaNoLiN !!! "
 }
 
 // Easy events 
@@ -32,7 +32,7 @@ io.on('connection', (socket) => {
 
     
     socket.send(welcome())
-
+    socket.emit('message', currentClient.getUsername + " has connected.")
 
     
     // Message event handling
@@ -45,6 +45,7 @@ io.on('connection', (socket) => {
 
     // Client disconnection
     socket.on('disconnect', () => {
+        socket.emit('message', currentClient.getUsername + " has disconnected.")
         console.log('Client disconnected: ', currentClient.getId());
     }); 
 });
