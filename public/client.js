@@ -3,6 +3,7 @@ const socket = io();
 const messagesDiv = document.getElementById('messages');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
+const clientsConnected = document.getElementById('clientsConnected')
 
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -39,6 +40,10 @@ socket.on('message', (message) => {
     const newMessage = document.createElement('div'); 
     newMessage.textContent = message; 
     messagesDiv.appendChild(newMessage); 
+});
+
+socket.on('clients', (currentClients) => {
+    clientsConnected.textContent(currentClients)
 });
 
 

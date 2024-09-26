@@ -20,6 +20,8 @@ function welcome():string{
     return "Server: Welcome to RutChat by MaNoLiN !!! "
 }
 
+let currentUsers:number;
+
 // Easy events 
 io.on('connection', (socket) => {
     console.log('New client connected to RutChat!:', socket.id);
@@ -38,11 +40,11 @@ io.on('connection', (socket) => {
         currentClient = new client(socket.id, finalUsername);
     });
 
-    
+    currentUsers += 1;
     socket.send(welcome())
     socket.emit('message', currentClient.getUsername + " has connected.")
+    socket.emit('clients', "Users conected: " + currentUsers);
 
-    
     // Message event handling
     socket.on('message', (message: string) => {
         // We send the message to the clients.
@@ -57,6 +59,8 @@ io.on('connection', (socket) => {
     socket.on('disconnect', () => {
         socket.emit('message', currentClient.getUsername + " has disconnected.")
         console.log('Client disconnected: ', currentClient.getId());
+        currentUsers =- 1;
+        socket.emit('clients', "Users conected: " + currentUsers);
     }); 
 });
 
