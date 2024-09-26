@@ -27,7 +27,15 @@ io.on('connection', (socket) => {
 
     // USERNAME EVENT
     socket.on('username', (username:string) => {
-        currentClient = new client(socket.id, username);
+
+        let finalUsername:string;
+        if (username.length < 15){
+            finalUsername = username
+        }
+        else {
+            finalUsername = "Anonymous"
+        }
+        currentClient = new client(socket.id, finalUsername);
     });
 
     
@@ -39,8 +47,10 @@ io.on('connection', (socket) => {
     socket.on('message', (message: string) => {
         // We send the message to the clients.
         let filteredMessage:string = "[" + currentClient.getUsername() + "]" + " -> " + message;
-        io.emit('message', filteredMessage);
-        
+        if (!(filteredMessage.length > 250)){
+            io.emit('message', filteredMessage);
+        }
+
     });
 
     // Client disconnection
