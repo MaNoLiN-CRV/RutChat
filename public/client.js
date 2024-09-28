@@ -3,13 +3,15 @@ const socket = io();
 const messagesDiv = document.getElementById('messages');
 const messageInput = document.getElementById('messageInput');
 const sendButton = document.getElementById('sendButton');
-const clientsConnected = document.getElementById('clientsConnected')
+const clientsConnected = document.getElementById('clientsConnected');
+
+const maxMessages = 100;
 
 
 document.addEventListener('DOMContentLoaded', () => {
-    let username = '';
+    let username = '-';
 
-    while (username.trim() === '') {
+    while (username.trim() === '' || username === '-') {
         username = prompt('Username: ');
     }
 
@@ -37,38 +39,25 @@ sendButton.addEventListener('click', () => {
 
 
 socket.on('message', (message) => {
+    let messages = messagesDiv.childNodes;
+    if (messages.length > maxMessages){
+        messagesDiv.innerHTML = ''
+    }
     const newMessage = document.createElement('div'); 
     newMessage.textContent = message; 
     messagesDiv.appendChild(newMessage); 
+    messagesDiv.scrollTop = messagesDiv.scrollHeight;
+    
 });
 
 socket.on('clients', (currentClients) => {
-    clientsConnected.textContent(currentClients)
-});
-
-
-
-// Función para agregar mensajes al cuadro de chat
-document.getElementById('sendButton').addEventListener('click', function() {
-    const messageInput = document.getElementById('messageInput');
-    const chatBox = document.getElementById('messages');
-    const message = messageInput.value;
-
-    if (message.trim() !== '') {
-        const messageElement = document.createElement('div');
-        messageElement.classList.add('message');
-        messageElement.textContent = message;
-
-        chatBox.appendChild(messageElement);
-        chatBox.scrollTop = chatBox.scrollHeight; // Para que el scroll baje al último mensaje
-
-        messageInput.value = ''; // Limpiar el campo de texto
-    }
+    clientsConnected.innerHTML = currentClients
 });
 
 // También enviar mensaje al presionar Enter
 document.getElementById('messageInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
+        console.log("enter")
         document.getElementById('sendButton').click();
     }
 });
