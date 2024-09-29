@@ -10,11 +10,11 @@ const maxMessages = 100;
 
 document.addEventListener('DOMContentLoaded', () => {
     let username = '-';
-
+    password = prompt("Password: ");
+    socket.emit('login', password);
     while (username.trim() === '' || username === '-') {
         username = prompt('Username: ');
     }
-
     socket.emit('username', username);
 });
 
@@ -57,7 +57,6 @@ socket.on('clients', (currentClients) => {
 // También enviar mensaje al presionar Enter
 document.getElementById('messageInput').addEventListener('keypress', function(e) {
     if (e.key === 'Enter') {
-        console.log("enter")
         document.getElementById('sendButton').click();
     }
 });

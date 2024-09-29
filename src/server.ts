@@ -3,7 +3,6 @@ import { createServer } from 'http';
 import { Server, Socket } from 'socket.io';
 import { client } from './clients/client';
 
-
 // Express is a framework that allows to easy control the endpoints of a http server
 // Also it can serve static resources like html , css and javascript
 // It uses the native http module from node.js
@@ -18,22 +17,36 @@ app.use(express.static('public'));
 
 /////// GLOBAL VARIABLES ////////
 
+const port:number = 3000;
 const maxUsernameLength:number = 20;
 const maxMessageLength:number = 200;
 const defaultUsername = "Anonymous";
-const defaultWelcome:string = "Server: Welcome to RutChat by MaNoLiN !!! v1.0";
+const defaultWelcome:string = "Server: Welcome to RutChat by MaNoLiN !!! v1.1";
+const secretPass:string = "secret"
 
 ///////////////////////////////////
 function welcome():string{
     return defaultWelcome;
 }
 
-let currentUsers:number;
+let currentUsers:number = 0;
 
 // Easy events 
 io.on('connection', (socket) => {
+    let passwordFailed:boolean = true;
     console.log('New client connected to RutChat!:', socket.id);
     let currentClient:client = new client(socket.id, "Anonymous");
+
+    // LOGIN EVENT
+    socket.on('login', (password:string) => {
+        if (password !== secretPass){
+            socket.emit('message', "Server: Login Failed!!! ");
+            socket.disconnect(true);
+            console.log("Failed login!")
+        }else{
+            passwordFailed = false;
+        }
+    });
 
     // USERNAME EVENT
     socket.on('username', (username:string) => {
@@ -45,12 +58,11 @@ io.on('connection', (socket) => {
         else {
             finalUsername = defaultUsername;
         }
+        currentUsers += 1;
         currentClient = new client(socket.id, finalUsername);
-        io.emit('message', currentClient.getUsername() + " has connected.")
+        io.emit('message', currentClient.getUsername() + " has connected.");
         io.emit('clients', "Users conected: " + currentUsers);
     });
-
-    currentUsers += 1;
     socket.send(welcome())
     
 
@@ -66,14 +78,16 @@ io.on('connection', (socket) => {
 
     // Client disconnection
     socket.on('disconnect', () => {
-        io.emit('message', currentClient.getUsername() + " has disconnected.")
         console.log('Client disconnected: ', currentClient.getUsername());
-        currentUsers -= 1;
-        io.emit('clients', "Users conected: " + currentUsers);
+        if (!passwordFailed){
+            io.emit('message', currentClient.getUsername() + " has disconnected.")
+            currentUsers -= 1;
+            io.emit('clients', "Users conected: " + currentUsers);
+        }
     }); 
 });
 
 
-httpServer.listen(3000, () => {
-    console.log('Server listening in http://localhost:3000');
+httpServer.listen(port, () => {
+    console.log('Server listening in http://localhost:' + port);
 });

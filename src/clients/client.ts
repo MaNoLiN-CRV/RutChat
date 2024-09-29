@@ -2,6 +2,7 @@
 export class client{
     private id:string = " ";
     private username:string = " ";
+    private isLogged:boolean = false;
 
     constructor(id:string , username:string) {
         this.id = id;
@@ -19,4 +20,5 @@ export class client{
     setId(id:string){
         this.id = id;
     }
+    
 }
