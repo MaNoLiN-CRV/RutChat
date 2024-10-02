@@ -1,0 +1,194 @@
+html, body {
+    background-color: #FFFFFF; /* Fondo blanco */
+    font-family: 'Courier New', Courier, monospace;
+    color: #000000; /* Texto negro */
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.chat-container {
+    margin-top: 30px;
+    width: 800px;
+    background-color: #B0B0B0; /* Fondo gris para el chat */
+    border: 2px solid #000000; /* Bordes negros */
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 0 10px #000000; /* Sombra negra */
+}
+
+.chat-box {
+    height: 400px;
+    overflow-y: scroll;
+    overflow-x: auto;
+    padding: 15px;
+    border-bottom: 2px solid #000000; /* Bordes negros */
+}
+
+.clientsConnected {
+    display: flex;
+    flex-wrap: nowrap;
+    position: relative;
+}
+
+.message {
+    margin: 5px 0;
+    background-color: #A0A0A0; /* Fondo gris oscuro para los mensajes */
+    padding: 8px;
+    border-radius: 5px;
+    overflow-y: scroll;
+    color: #FFFFFF; /* Texto blanco en los mensajes */
+}
+
+.chat-input {
+    display: flex;
+    border-top: 2px solid #000000; /* Bordes negros */
+}
+
+#messageInput {
+    flex: 1;
+    background-color: #D3D3D3; /* Fondo gris claro */
+    border: none;
+    color: #000000; /* Texto negro */
+    padding: 10px;
+    font-size: 15px;
+    font: bold;
+}
+
+#message-input::placeholder {
+    color: #555; /* Placeholder gris oscuro */
+}
+
+#send-button {
+    background-color: #000000; /* Fondo negro */
+    border: none;
+    padding: 10px 20px;
+    color: #FFFFFF; /* Texto blanco */
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#send-button:hover {
+    background-color: #505050; /* Fondo gris oscuro al hacer hover */
+}
+
+/* From Uiverse.io by adamgiebl */ 
+.sendButton {
+    font-family: inherit;
+    font-size: 20px;
+    background: #000000; /* Fondo negro */
+    color: white; /* Texto blanco */
+    padding: 0.7em 1em;
+    padding-left: 0.9em;
+    display: flex;
+    align-items: center;
+    border: none;
+    border-radius: 16px;
+    overflow: hidden;
+    transition: all 0.2s;
+    cursor: pointer;
+}
+
+.sendButton span {
+    display: block;
+    margin-left: 0.3em;
+    transition: all 0.3s ease-in-out;
+}
+
+.sendButton svg {
+    display: block;
+    transform-origin: center center;
+    transition: transform 0.3s ease-in-out;
+}
+
+.sendButton:hover .svg-wrapper {
+    animation: fly-1 0.6s ease-in-out infinite alternate;
+}
+
+.sendButton:hover svg {
+    transform: translateX(1.2em) rotate(45deg) scale(1.1);
+}
+
+.sendButton:hover span {
+    transform: translateX(5em);
+}
+
+.sendButton:active {
+    transform: scale(0.95);
+}
+
+@keyframes fly-1 {
+    from {
+        transform: translateY(0.1em);
+    }
+
+    to {
+        transform: translateY(-0.1em);
+    }
+}
+
+/* FILE UPLOAD */
+#file-up {
+    display: none;
+}
+#custum-file-upload {
+    height: 200px;
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    align-items: space-between;
+    gap: 20px;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #000000; /* Bordes negros */
+    background-color: #E0E0E0; /* Fondo gris claro */
+    padding: 1.5rem;
+    border-radius: 10px;
+    box-shadow: 0px 48px 35px -48px #000000; /* Sombra negra */
+}
+
+.custum-file-upload .icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .icon svg {
+    height: 80px;
+    fill: #000000; /* Icono negro */
+}
+
+.custum-file-upload .text {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.custum-file-upload .text span {
+    font-weight: 400;
+    color: #000000; /* Texto negro */
+}
+
+.custum-file-upload input {
+    display: none;
+}
+
+/* FILE DOWNLOAD */
+.downloadLink {
+    display: none;
+}
+
+#rutchat {
+    color: black;
+}
+
+#sendFile {
+    display: flex;
+    margin-top: 30px;
+    background-color: red;
+    align-self: center;
+}
