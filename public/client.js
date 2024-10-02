@@ -5,7 +5,7 @@ const sendButton = document.getElementById("sendButton");
 const clientsConnected = document.getElementById("clientsConnected");
 const maxMessages = 100;
 const helpOptions = "/help | /download file | /files | /put on | /put off | /clear |\n /styles ";
-const styles = "/#discret | /#normal " ;
+const styles = "/#discret | /#normal | /#sea" ;
 
 document.addEventListener("DOMContentLoaded", () => {
   let username = "-";
@@ -75,6 +75,10 @@ function filterCommand(command) {
         document.getElementById("theme").href = "normal.css";
         break;
       };
+      case "/#sea": {
+        document.getElementById("theme").href = "sea.css";
+        break;
+      }
       default:
         chatPrint("No commands found.");
         break;
