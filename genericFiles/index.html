@@ -7,6 +7,19 @@
     <link rel="stylesheet" href="normal.css" id="theme">
 </head>
 <body>
+
+  <div id="password-modal">
+    <div id="password-form">
+      <label for="username">Username:</label>
+      <input type="text" id="username-input" placeholder="Enter username">
+      <label for="password">Password:</label>
+      <input type="password" id="password-input" placeholder="Enter password">
+      <button id="submit-password">Submit</button>
+    </div>
+  </div>
+
+  <div id="main-content" style="display: none;">
+
     <div id="rutchat"><pre>
 
       ██▀███   █    ██ ▄▄▄█████▓    ▄████▄   ██░ ██  ▄▄▄     ▄▄▄█████▓
@@ -74,7 +87,9 @@
     </div>
       
     <a href="" download id="downloadLink"></a>
-    
+  </div>
+
+
     <script src="/socket.io/socket.io.js"></script> 
     <script src="client.js" defer></script> 
     

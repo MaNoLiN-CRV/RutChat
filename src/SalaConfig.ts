@@ -1,4 +1,4 @@
-export class ServerConfig {
+export class SalaConfig {
     port: number;
     maxUsernameLength: number;
     maxMessageLength: number;
@@ -62,8 +62,38 @@ export class ServerConfig {
         return this;
     }
 
-    public build(): ServerConfig {
-        return new ServerConfig(
+    public getPort(): number {
+        return this.port;
+    }
+
+    public getMaxUsernameLength(): number {
+        return this.maxUsernameLength;
+    }
+
+    public getMaxMessageLength(): number {
+        return this.maxMessageLength;
+    }
+
+    public getDefaultUsername(): string {
+        return this.defaultUsername;
+    }
+
+    public getDefaultWelcome(): string {
+        return this.defaultWelcome;
+    }
+
+    public getSecretPass(): string {
+        return this.secretPass;
+    }
+
+    public getMaxFileSizeMb(): number {
+        return this.maxFileSizeMb;
+    }
+
+    
+
+    public build(): SalaConfig {
+        return new SalaConfig(
             this.port,
             this.maxUsernameLength,
             this.maxMessageLength,
