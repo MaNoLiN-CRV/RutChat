@@ -48,6 +48,11 @@ export default class server {
   public start(port: number) {
     // We serve the statics files in the "public" folder
     this.app.use(express.static(this.storage.getPublicFolder()));
+
+    this.httpServer.listen(port, () => {
+      console.log("Server listening in http://localhost:" + port);
+    });
+
   }
 }
 

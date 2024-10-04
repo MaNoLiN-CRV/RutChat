@@ -8,14 +8,14 @@ const helpOptions = "/help | /download file | /files | /put on | /put off | /cle
 const styles = "/#discret | /#normal | /#sea" ;
 
 document.addEventListener("DOMContentLoaded", () => {
-
+  
   const passwordModal = document.getElementById("password-modal");
   const passwordInput = document.getElementById("password-input");
   const usernameInput = document.getElementById("username-input");
   const submitPasswordButton = document.getElementById("submit-password");
   const mainContent = document.getElementById("main-content");
-
-
+  
+  
   submitPasswordButton.addEventListener("click", () => {
     const username = usernameInput.value;
     const password = passwordInput.value;
@@ -88,15 +88,15 @@ function filterCommand(command) {
         break;
       };
       case "/#discret": {
-        document.getElementById("theme").href = "discret.css";
+        document.getElementById("theme").href = "../styles/discret.css";
         break;
       }
       case "/#normal": {
-        document.getElementById("theme").href = "normal.css";
+        document.getElementById("theme").href = "../styles/normal.css";
         break;
       };
       case "/#sea": {
-        document.getElementById("theme").href = "sea.css";
+        document.getElementById("theme").href = "../styles/sea.css";
         break;
       }
       default:

@@ -1,5 +1,8 @@
-import * as fs from 'fs';
+
 import multer from "multer";
+import * as fs from 'fs';
+import * as fsPromises from 'fs/promises';
+import path from "path";
 export class CustomStorage {
 
     private uploadPath: string;
@@ -7,7 +10,7 @@ export class CustomStorage {
     private maxFoldersAllowed: number = 20;
     private relativePath: string = ".";
     private storage: multer.StorageEngine;
-    private genericFilesPath:string = "/genericFiles/";
+    private genericFilesPath: string = "./genericFiles/";
 
     constructor() {
         this.publicFolder = this.uploadPathFolder();
@@ -21,7 +24,7 @@ export class CustomStorage {
             },
         });
 
-        copyFolder(this.genericFilesPath,this.publicFolder);
+        this.copyFolder(this.genericFilesPath, this.publicFolder);
     }
     // AUTOMATIC FOLDER CREATOR BLOSTONAZO
     private uploadPathFolder(): string {
@@ -79,23 +82,27 @@ export class CustomStorage {
         }
     }
 
-    private async function copyFolder(source: string, destination: string) {
+    
+    private async copyFolder(source: string, destination: string) {
         try {
-            await fs.mkdir(destination, { recursive: true });
-            const entries = await fs.readdir(source, { withFileTypes: true });
+            
+            await fsPromises.mkdir(destination, { recursive: true });
+            const entries = await fsPromises.readdir(source, { withFileTypes: true });
             for (const entry of entries) {
+
                 const sourcePath = path.join(source, entry.name);
                 const destinationPath = path.join(destination, entry.name);
                 if (entry.isDirectory()) {
-                    await copyFolder(sourcePath, destinationPath);
+                    await this.copyFolder(sourcePath, destinationPath);
                 } else {
-                    await fs.copyFile(sourcePath, destinationPath);
+                    await fsPromises.copyFile(sourcePath, destinationPath);
                 }
             }
-    
+
         } catch (error) {
             console.error(error);
         }
     }
+        
 }
 
