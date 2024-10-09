@@ -12,11 +12,8 @@ export class CustomFileTransfer {
     app: express.Application;
     io: Server
 
-    // Mega Bloste
-
-    constructor(salaConfig: SalaConfig, app: express.Application, io: Server) {
-        this.storage = new CustomStorage();
-
+    constructor(salaConfig: SalaConfig, app: express.Application, io: Server , storage: CustomStorage) {
+        this.storage = storage;
         this.salaConfig = salaConfig;
         this.app = express.application;
         this.io = io;

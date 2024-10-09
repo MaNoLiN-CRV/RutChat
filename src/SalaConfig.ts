@@ -14,7 +14,7 @@ export class SalaConfig {
         maxUsernameLength: number = 20,
         maxMessageLength: number = 100,
         defaultUsername: string = "Anonymous",
-        defaultWelcome: string = "Bienvenido",
+        defaultWelcome: string = "Welcome to RutChat!!",
         secretPass: string = "secret",
         maxFileSizeMb: number = 50
     ) {

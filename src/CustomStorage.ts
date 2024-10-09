@@ -1,8 +1,16 @@
-
 import multer from "multer";
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import path from "path";
+import * as fs from "fs";
+import * as fs from "fs";
+import * as fs from "fs";
+import * as fs from "fs";
+import * as console from "console";
+import * as path from "path";
+import * as path from "path";
+import * as console from "console";
+
 export class CustomStorage {
 
     private uploadPath: string;
@@ -11,9 +19,16 @@ export class CustomStorage {
     private relativePath: string = ".";
     private storage: multer.StorageEngine;
     private genericFilesPath: string = "./genericFiles/";
+    private _id:number;
 
-    constructor() {
-        this.publicFolder = this.uploadPathFolder();
+    constructor(id:number) {
+        this._id = id;
+        if (!fs.existsSync(this.relativePath + "public" + this._id)){
+            this.publicFolder = this.uploadPathFolder();
+            this.copyFolder(this.genericFilesPath, this.publicFolder);
+            this._id = Number.parseInt(this.publicFolder.split("public")[1])
+        }
+
         this.uploadPath = "/uploads/";
         this.storage = multer.diskStorage({
             destination: (req, file, cb) => {
@@ -24,18 +39,20 @@ export class CustomStorage {
             },
         });
 
-        this.copyFolder(this.genericFilesPath, this.publicFolder);
+
     }
+
     // AUTOMATIC FOLDER CREATOR BLOSTONAZO
     private uploadPathFolder(): string {
         let finalPath = "";
         for (let index = 0; index < this.maxFoldersAllowed; index++) {
-            let upPath = this.relativePath + "public" + index;
-            if (!(fs.existsSync(upPath))) {
-                fs.mkdirSync(upPath)
-                finalPath = upPath;
+            let publicPath = this.relativePath + "public" + index;
+            if (!(fs.existsSync(publicPath))) {
+                // CREATES THE UPLOAD PATH
+                fs.mkdirSync(publicPath)
+                finalPath = publicPath;
                 index = this.maxFoldersAllowed + 1;
-            };
+            }
         }
         return finalPath;
     }
@@ -65,13 +82,22 @@ export class CustomStorage {
         this.publicFolder = publicFolder;
     }
 
+
+    get id(): number {
+        return this._id;
+    }
+
+    set id(value: number) {
+        this._id = value;
+    }
+
     public filenames(folder: string): string[] {
         {
             let filenames: string[] = new Array();
-            const fs = require("fs");
+            const fs= require("fs");
 
             try {
-                const files = fs.readdirSync(folder);;
+                const files = fs.readdirSync(folder);
                 files.forEach((file: string) => {
                     filenames.push(file);
                 });
@@ -82,12 +108,12 @@ export class CustomStorage {
         }
     }
 
-    
+    // COPY THE SOURCE FOLDER TO THE DESTINATION FOLDER
     private async copyFolder(source: string, destination: string) {
         try {
-            
-            await fsPromises.mkdir(destination, { recursive: true });
-            const entries = await fsPromises.readdir(source, { withFileTypes: true });
+
+            await fsPromises.mkdir(destination, {recursive: true});
+            const entries = await fsPromises.readdir(source, {withFileTypes: true});
             for (const entry of entries) {
 
                 const sourcePath = path.join(source, entry.name);
@@ -103,6 +129,6 @@ export class CustomStorage {
             console.error(error);
         }
     }
-        
+
 }
 
