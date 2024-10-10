@@ -2,24 +2,18 @@ import multer from "multer";
 import * as fs from 'fs';
 import * as fsPromises from 'fs/promises';
 import path from "path";
-import * as fs from "fs";
-import * as fs from "fs";
-import * as fs from "fs";
-import * as fs from "fs";
 import * as console from "console";
-import * as path from "path";
-import * as path from "path";
-import * as console from "console";
+
 
 export class CustomStorage {
 
     private uploadPath: string;
-    private publicFolder: string;
+    private publicFolder!: string;
     private maxFoldersAllowed: number = 20;
     private relativePath: string = ".";
     private storage: multer.StorageEngine;
     private genericFilesPath: string = "./genericFiles/";
-    private _id:number;
+    private _id:number; 
 
     constructor(id:number) {
         this._id = id;

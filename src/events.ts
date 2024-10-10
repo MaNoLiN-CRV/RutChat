@@ -8,7 +8,7 @@ export class events {
   currenUsers:number = 0;
   config:SalaConfig;
   storage:CustomStorage;
-
+  
   constructor(ioParam: Server, conf:SalaConfig , storageParam:CustomStorage) {
     this.io = ioParam;
     this.config = conf;
@@ -51,19 +51,30 @@ export class events {
         }
         this.currenUsers += 1;
         currentClient = new client(socket.id, finalUsername);
-        this.io.emit("message", currentClient.getUsername() + " has connected.");
+        this.io.emit("messageConnected", currentClient.getUsername() + " has connected.");
         this.io.emit("clients", "Users conected: " + this.currenUsers);
       });
       socket.send(this.config.getDefaultUsername());
 
-      // Message event handling FOR BLOSTONAZO
+
+
+
+        /**
+        * Envia el mensaje a todos los clientes conectados 
+        */
+
       socket.on("message", (message: string) => {
+
+      
         // We send the message to the clients. BLOSTEROIDE
         let filteredMessage: string =
-          "[" + currentClient.getUsername() + "]" + " -> " + message;
+          "" + currentClient.getUsername() + ": " + message;
         if (!(message.length > this.config.getMaxMessageLength())) {
           this.io.emit("message", filteredMessage);
         }
+
+
+
       });
 
       // Client disconnection

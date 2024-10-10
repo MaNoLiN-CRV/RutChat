@@ -37,28 +37,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Prints information in the chat //////
-function chatPrint(text, options) {
-  let newMessage;
+function chatPrint(text, type) {
+  let newMessage; 
+  alert("tus muertos debug");
   
-  // Si options es un string y es "special", manejamos el caso especial
-  if (options === "special") {
+  if (type === "special") {
+    alert("New user connected. Special");
     newMessage = document.createElement("h");
-    newMessage.textContent = text;
-    newMessage.style.color = "blue"; 
-    messagesDiv.appendChild(newMessage);
-  } 
-  // Si es un string y no es "special", es un puto jodido bloste color
-  else if (typeof options === "string") {
-    newMessage.textContent = text;
-    messagesDiv.appendChild(newMessage).style.color = options;
-    messagesDiv.appendChild(newMessage);
-  } else if (options == null){
+    
+  } else {
+    alert("New user connected. Normal");
     newMessage = document.createElement("p");
-    newMessage.textContent = text;
-    messagesDiv.appendChild(newMessage);
   }
 
-  messagesDiv.scrollTop = messagesDiv.scrollHeight; // Mantiene el scroll en la parte inferior BLOSTEJAJA
+  newMessage.textContent = text;
+  messagesDiv.appendChild(newMessage);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+
+
+function chatPrint(text,color) {
+  alert("tus muertos");
+  const newMessage = document.createElement("p");
+  newMessage.textContent = text;
+  messagesDiv.appendChild(newMessage).style.color = color;
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 //////////////////////////////////////
 

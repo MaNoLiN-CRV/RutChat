@@ -37,28 +37,30 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
 // Prints information in the chat //////
-function chatPrint(text, options) {
-  let newMessage;
+function chatPrint(text, type) {
+  let newMessage; 
   
-  // Si options es un string y es "special", manejamos el caso especial
-  if (options === "special") {
-    newMessage = document.createElement("h");
-    newMessage.textContent = text;
-    newMessage.style.color = "blue"; 
-    messagesDiv.appendChild(newMessage);
-  } 
-  // Si es un string y no es "special", es un puto jodido bloste color
-  else if (typeof options === "string") {
-    newMessage.textContent = text;
-    messagesDiv.appendChild(newMessage).style.color = options;
-    messagesDiv.appendChild(newMessage);
-  } else if (options == null){
+  if (type === "special") {
+    alert("New user connected. Special");
+    newMessage = document.createElement("h3");
+    
+  } else {
+    alert("New user connected. Normal");
     newMessage = document.createElement("p");
-    newMessage.textContent = text;
-    messagesDiv.appendChild(newMessage);
   }
 
-  messagesDiv.scrollTop = messagesDiv.scrollHeight; // Mantiene el scroll en la parte inferior BLOSTEJAJA
+  newMessage.textContent = text;
+  messagesDiv.appendChild(newMessage);
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
+}
+
+
+
+function chatPrint(text,color) {
+  const newMessage = document.createElement("p");
+  newMessage.textContent = text;
+  messagesDiv.appendChild(newMessage).style.color = color;
+  messagesDiv.scrollTop = messagesDiv.scrollHeight;
 }
 //////////////////////////////////////
 
@@ -138,12 +140,11 @@ socket.on("files", (files) => {
 });
 
 socket.on("messageConnected", (message) => {
- 
+  alert("New user connected DESDE CLIENT JS SOCKET.");
   let messages = messagesDiv.childNodes;
   if (messages.length > maxMessages) {
     messagesDiv.innerHTML = "";
   }
-
   chatPrint(message, "special");
 });
 
