@@ -17,10 +17,9 @@ export class CustomStorage {
 
     constructor(id:number) {
         this._id = id;
+        this.publicFolder = this.relativePath + "public" + this._id;
         if (!fs.existsSync(this.relativePath + "public" + this._id)){
-            this.publicFolder = this.uploadPathFolder();
             this.copyFolder(this.genericFilesPath, this.publicFolder);
-            this._id = Number.parseInt(this.publicFolder.split("public")[1])
         }
 
         this.uploadPath = "/uploads/";

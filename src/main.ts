@@ -1,6 +1,6 @@
-import server from "./server";
-
-const app = new server(3);
-app.start(3000);
+import {ChatsManager} from "./ChatsManager.ts";
+// INIT AND STARTS THE CHATS
+ChatsManager.init(3);
+ChatsManager.startChats();
 
 
