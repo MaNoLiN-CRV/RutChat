@@ -38,21 +38,26 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Prints information in the chat //////
 function chatPrint(text, options) {
+
   let newMessage;
   
   // Si options es un string y es "special", manejamos el caso especial
   if (options === "special") {
+    alert("AQUI NOT NULL");
     newMessage = document.createElement("h");
     newMessage.textContent = text;
     newMessage.style.color = "blue"; 
     messagesDiv.appendChild(newMessage);
   } 
   // Si es un string y no es "special", es un puto jodido bloste color
-  else if (typeof options === "string") {
+  else if (typeof options != null) {
+    alert("AQUI NOT NULL");
+    newMessage = document.createElement("p");
     newMessage.textContent = text;
     messagesDiv.appendChild(newMessage).style.color = options;
     messagesDiv.appendChild(newMessage);
   } else if (options == null){
+    alert("AQUI NOT NULL");
     newMessage = document.createElement("p");
     newMessage.textContent = text;
     messagesDiv.appendChild(newMessage);
@@ -71,11 +76,18 @@ function chatPrint(text, options) {
 
 function filterCommand(command) {
   if (command.includes("/download")) {
+
+    
+
     let filename = command.split("/download ")[1];
     let downloader = document.getElementById("downloadLink");
     downloader.href = '/uploads/' + filename;
     downloader.click();
+
+
     chatPrint("File " + filename + " downloaded." , "lightgreen")
+
+
   } else {
     switch (command) {
       case "/help": {
@@ -105,16 +117,13 @@ function filterCommand(command) {
         break;
       };
 
-      
       case command.startsWith("/changeBloste"): {
-
         const theme = command.split("/changeBloste ")[1];
         handleBlosteChange(theme);
-
       };
       
       default:
-        chatPrint("No commands found.");
+        chatPrint("No command found.");
         break;
         
     }

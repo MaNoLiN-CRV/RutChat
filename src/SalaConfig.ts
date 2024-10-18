@@ -7,7 +7,6 @@ export class SalaConfig {
     secretPass: string;
     maxFileSizeMb: number;
 
-   
 
     constructor(
         port: number = 3000,

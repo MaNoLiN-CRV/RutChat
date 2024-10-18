@@ -1,7 +1,7 @@
 import { Server, Socket } from "socket.io";
-import { client } from "./clients/client";
-import { SalaConfig } from "./SalaConfig";
-import { CustomStorage } from "./CustomStorage";
+import { client } from "../clients/client.ts";
+import { SalaConfig } from "../SalaConfig.ts";
+import { CustomStorage } from "../CustomStorage.ts";
 
 export class events {
   io: Server;
@@ -13,7 +13,7 @@ export class events {
     this.io = ioParam;
     this.config = conf;
     this.storage = storageParam;
-    // Easy events
+    // Easy blostoevents
 
     
     this.io.on("connection", (socket:Socket) => {
@@ -77,7 +77,7 @@ export class events {
 
       });
 
-      // Client disconnection
+      // Client disconnection BLOSTE
       socket.on("disconnect", () => {
         console.log("Client disconnected: ", currentClient.getUsername());
         if (!passwordFailed) {

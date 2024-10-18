@@ -1,6 +1,6 @@
 import multer from "multer";
 import { CustomStorage } from "./CustomStorage.ts";
-import { SalaConfig } from "./SalaConfig";
+import { SalaConfig } from "./SalaConfig.ts";
 import express from "express";
 import { Server } from "socket.io";
 import * as fs from 'fs';

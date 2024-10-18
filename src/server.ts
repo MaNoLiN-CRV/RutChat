@@ -1,7 +1,8 @@
 import express from "express";
 import { createServer } from "http";
+import { Server as httpServer } from "http";
 import { Server, Socket } from "socket.io";
-import { SalaConfig } from "./SalaConfig.ts";
+import { SalaConfig }  from "./SalaConfig.ts";
 import { CustomStorage } from "./CustomStorage.ts";
 import { CustomFileTransfer } from "./CustomFileTransfer.ts";
 import { events } from "./events/events.ts";
@@ -14,10 +15,10 @@ import e from "express";
 // Also it can serve static resources like html , css and javascript
 // It uses the native http module from node.js
 
-export default class server {
+export class server {
 
   private _app: express.Application;
-  private _httpServer: any;
+  private _httpServer: httpServer;
   private _io: Server;
   private _config: SalaConfig;
   private _storage: CustomStorage;
@@ -30,7 +31,7 @@ export default class server {
     this._ID = id;
     // The http server delegates the http requets to our Express framework.
     this._app = express();
-    // We creates a socket server
+    // We create a socket server
     this._httpServer = createServer(this._app);
     this._io = new Server(this._httpServer);
 

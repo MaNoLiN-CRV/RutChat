@@ -1,15 +1,13 @@
-import server from "./server.ts";
+import {server} from "./server.ts";
 
 export class ChatsManager {
 
-    
-
-    static chats: Array<server>;
+    static chats = new Array<server>;
 
     static init(numberOfChats: number) {
         this.chats = new Array<server>();
         for (let i = 0; i < numberOfChats; i++) {
-            this.chats.push(new server(i));
+            ChatsManager.chats.push(new server(i));
         }
     }
 
@@ -18,6 +16,7 @@ export class ChatsManager {
         if (this.chats) {
             this.chats.forEach((chat:server) => {
                chat.start(basePort);
+               console.log("NEW CHAT STARTED!")
                basePort++;
             });
         }

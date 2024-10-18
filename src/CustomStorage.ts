@@ -8,7 +8,7 @@ import * as console from "console";
 export class CustomStorage {
 
     private uploadPath: string;
-    private publicFolder!: string;
+    private publicFolder: string;
     private maxFoldersAllowed: number = 20;
     private relativePath: string = ".";
     private storage: multer.StorageEngine;
