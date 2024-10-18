@@ -62,6 +62,13 @@ function chatPrint(text, options) {
 }
 //////////////////////////////////////
 
+
+
+
+
+
+
+
 function filterCommand(command) {
   if (command.includes("/download")) {
     let filename = command.split("/download ")[1];
@@ -97,21 +104,19 @@ function filterCommand(command) {
         chatPrint(styles, 'white');
         break;
       };
-      case "/#discret": {
-        document.getElementById("theme").href = "../styles/discret.css";
-        break;
-      }
-      case "/#normal": {
-        document.getElementById("theme").href = "../styles/normal.css";
-        break;
+
+      
+      case command.startsWith("/changeBloste"): {
+
+        const theme = command.split("/changeBloste ")[1];
+        handleBlosteChange(theme);
+
       };
-      case "/#sea": {
-        document.getElementById("theme").href = "../styles/sea.css";
-        break;
-      }
+      
       default:
         chatPrint("No commands found.");
         break;
+        
     }
   }
   messageInput.value = "";
@@ -178,3 +183,38 @@ document
       document.getElementById("sendButton").click();
     }
   });
+
+
+  // Funcion para cambiar el tema
+
+  function handleBlosteChange(theme) {
+
+    // Removemos el /# del inicio del comando para obtener solo el nombre del tema
+    const themeName = theme.replace('/#', '');
+    
+    switch (themeName) {
+        case "sea": {
+            document.documentElement.setAttribute('data-theme', 'sea');
+            chatPrint("Tema cambiado a Sea Bloste");
+            break;
+        }
+        case "bloste": {
+            document.documentElement.setAttribute('data-theme', 'bloste');
+            chatPrint("Tema cambiado a Bloste");
+            break;
+        }
+        case "nordic": {
+            document.documentElement.setAttribute('data-theme', 'nordic');
+            chatPrint("Tema cambiado a Nordic");
+            break;
+        }
+        default:
+            chatPrint("¿Qué cojonazos? No existe ese tema");
+            break;
+    }
+
+  }
+
+
+
+  

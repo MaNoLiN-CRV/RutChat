@@ -4,7 +4,7 @@ import { Server, Socket } from "socket.io";
 import { SalaConfig } from "./SalaConfig.ts";
 import { CustomStorage } from "./CustomStorage.ts";
 import { CustomFileTransfer } from "./CustomFileTransfer.ts";
-import { events } from "./events.ts";
+import { events } from "./events/events.ts";
 import * as console from "console";
 import e from "express";
 

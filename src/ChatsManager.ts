@@ -1,6 +1,9 @@
 import server from "./server.ts";
 
 export class ChatsManager {
+
+    
+
     static chats: Array<server>;
 
     static init(numberOfChats: number) {
