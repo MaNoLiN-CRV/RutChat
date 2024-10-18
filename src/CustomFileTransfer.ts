@@ -11,20 +11,26 @@ export class CustomFileTransfer {
     upload: multer.Multer;
     app: express.Application;
     io: Server
-
+    /**
+     * File transfer class constructor
+     * @param salaConfig Configuration of the chat
+     * @param app Express app
+     * @param io IO socket server
+     * @param storage Custom storage of the chat
+     */
     constructor(salaConfig: SalaConfig, app: express.Application, io: Server , storage: CustomStorage) {
         this.storage = storage;
         this.salaConfig = salaConfig;
-        this.app = express.application;
+        this.app = app;
         this.io = io;
-        
-
         this.upload = multer({
             storage: this.storage.getStorage(),
             limits: { fileSize: salaConfig.maxFileSizeMb * 1024 * 1024 },
         });
-
-        // File upload
+            
+        
+        //POST FILE UPLOAD CONFIGURATION (Vlosty)
+         
         this.app.post(this.storage.getUploadPath(), this.upload.single("file"), (req, res) => {
             if (!req.file) {
                 return res.status(400).send("Error uploading the file.");
@@ -38,7 +44,7 @@ export class CustomFileTransfer {
             }
         });
 
-        // File download
+        // FILE UPLOAD FOLDER GET CONFIG
         app.get(this.storage.getUploadPath() + ":filename", (req, res) => {
             const filePath = this.storage.getPublicFolder() + this.storage.getUploadPath();
             // If file exists

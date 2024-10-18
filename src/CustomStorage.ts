@@ -13,15 +13,18 @@ export class CustomStorage {
     private relativePath: string = ".";
     private storage: multer.StorageEngine;
     private genericFilesPath: string = "./genericFiles/";
-    private _id:number; 
+    private _id:number;
 
+    /**
+     * Custom storage constructor
+     * @param id The id is the number of the public folder.
+     */
     constructor(id:number) {
         this._id = id;
         this.publicFolder = this.relativePath + "public" + this._id;
         if (!fs.existsSync(this.relativePath + "public" + this._id)){
             this.copyFolder(this.genericFilesPath, this.publicFolder);
         }
-
         this.uploadPath = "/uploads/";
         this.storage = multer.diskStorage({
             destination: (req, file, cb) => {
@@ -31,11 +34,13 @@ export class CustomStorage {
                 cb(null, this.filenamesStorage(file.originalname));
             },
         });
-
-
+        console.log("STORAGE " + this._id + " INITIALIZADED | PUBLIC FOLDER: " + this.getPublicFolder())
     }
 
-    // AUTOMATIC FOLDER CREATOR BLOSTONAZO
+    /**
+     * Automatic folder creator.
+     * @returns the public folder path.
+     */
     private uploadPathFolder(): string {
         let finalPath = "";
         for (let index = 0; index < this.maxFoldersAllowed; index++) {
@@ -49,7 +54,12 @@ export class CustomStorage {
         }
         return finalPath;
     }
-
+    
+    /**
+     * 
+     * @param filename The name of the file.
+     * @returns The name of the file with a random number
+     */
     private filenamesStorage(filename: string): string {
         let file: string[] = filename.split('.');
         return file[0] + Math.floor(Math.random() * 10) + '.' + file[1];
@@ -83,11 +93,15 @@ export class CustomStorage {
     set id(value: number) {
         this._id = value;
     }
-
+    /**
+     * 
+     * @param folder Target folder
+     * @returns the names of the files saved in the folder.
+     */
     public filenames(folder: string): string[] {
         {
             let filenames: string[] = new Array();
-            const fs= require("fs");
+            const fs = require("fs");
 
             try {
                 const files = fs.readdirSync(folder);
@@ -101,14 +115,18 @@ export class CustomStorage {
         }
     }
 
-    // COPY THE SOURCE FOLDER TO THE DESTINATION FOLDER
+    
+
+    /**
+     * Copy the content of the source folder to the destination folder.
+     * @param source source folder
+     * @param destination destination folder
+     */
     private async copyFolder(source: string, destination: string) {
         try {
-
             await fsPromises.mkdir(destination, {recursive: true});
             const entries = await fsPromises.readdir(source, {withFileTypes: true});
             for (const entry of entries) {
-
                 const sourcePath = path.join(source, entry.name);
                 const destinationPath = path.join(destination, entry.name);
                 if (entry.isDirectory()) {

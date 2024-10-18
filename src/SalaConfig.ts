@@ -7,7 +7,16 @@ export class SalaConfig {
     secretPass: string;
     maxFileSizeMb: number;
 
-
+    /**
+     * Constructor of the chat config
+     * @param port Port used to host the chat
+     * @param maxUsernameLength Max username length
+     * @param maxMessageLength Max message length
+     * @param defaultUsername Default username
+     * @param defaultWelcome Default welcome
+     * @param secretPass Secret Passoword
+     * @param maxFileSizeMb Max filesize (megabytes)
+     */
     constructor(
         port: number = 3000,
         maxUsernameLength: number = 20,
@@ -90,7 +99,10 @@ export class SalaConfig {
     }
 
     
-
+    /**
+     * Builder
+     * @returns new Salaconfig 
+     */
     public build(): SalaConfig {
         return new SalaConfig(
             this.port,
