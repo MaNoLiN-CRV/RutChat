@@ -1,3 +1,4 @@
+const fs = require('fs');
 export class SalaConfig {
     port: number;
     maxUsernameLength: number;
@@ -6,6 +7,12 @@ export class SalaConfig {
     defaultWelcome: string;
     secretPass: string;
     maxFileSizeMb: number;
+    // SERVER CERTIFICATES 
+    private _certificates = {
+        key: fs.readFileSync('./src/certs/server.key'),
+        cert: fs.readFileSync('./src/certs/server.cert')
+    };
+    
 
     /**
      * Constructor of the chat config
@@ -40,6 +47,10 @@ export class SalaConfig {
         return this;
     }
 
+    public get certificates() {
+        return this._certificates;
+    }
+    
     public setMaxUsernameLength(maxUsernameLength: number): this {
         this.maxUsernameLength = maxUsernameLength;
         return this;
@@ -97,6 +108,8 @@ export class SalaConfig {
     public getMaxFileSizeMb(): number {
         return this.maxFileSizeMb;
     }
+
+
 
     
     /**

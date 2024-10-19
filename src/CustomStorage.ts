@@ -94,7 +94,7 @@ export class CustomStorage {
         this._id = value;
     }
     /**
-     * 
+     * It enumerates the files of the selected folder
      * @param folder Target folder
      * @returns the names of the files saved in the folder.
      */

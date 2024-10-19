@@ -7,7 +7,7 @@ import { CustomStorage } from "./CustomStorage.ts";
 import { CustomFileTransfer } from "./CustomFileTransfer.ts";
 import { events } from "./events/events.ts";
 import * as console from "console";
-
+const https = require('https');
 // FRAMEWORK CONFIG
 
 // Express is a framework that allows to easy control the endpoints of a http server
@@ -15,9 +15,9 @@ import * as console from "console";
 // It uses the native http module from node.js (Blosted)
 
 export class server {
-
+  
   private _app: express.Application;
-  private _httpServer: httpServer;
+  private _httpsServer = https;
   private _io: Server;
   private _config: SalaConfig;
   private _storage: CustomStorage;
@@ -30,9 +30,7 @@ export class server {
     this._ID = id;
     // The http server delegates the http requets to our Express framework.
     this._app = express();
-    // We create a socket server
-    this._httpServer = createServer(this._app);
-    this._io = new Server(this._httpServer);
+    this._io = new Server(this._httpsServer);
 
     this._config = new SalaConfig().build()
       .setDefaultWelcome("Server: Welcome to RutChat by MaNoLiN & Félix !!! use /help")
@@ -55,8 +53,8 @@ export class server {
   };
 
   public start(port: number) {
-    this._httpServer.listen(port, () => {
-      console.log("Server listening in http://localhost:" + port);
+     this._httpsServer.createServer(this._config.certificates, this.app).listen(port, () => {
+      console.log("Server listening in https://localhost:" + port);
     });
 
   }
@@ -68,7 +66,7 @@ export class server {
   }
 
   get httpServer(): httpServer {
-    return this._httpServer;
+    return this._httpsServer;
   }
 
   get io(): Server {
