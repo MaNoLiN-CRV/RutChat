@@ -43,10 +43,11 @@ Welcome to **RutChat**, a powerful, multi-room chat application built using Type
 
 ## **🚧 Pending Updates**
 - **Push Notifications**: Add support for browser-based notifications to alert users of new messages.
-- **Emoji Reactions**: Introduce the ability to react to messages with emojis.
+- **Emoji Reactions**: Introduce the ability to react to messages with emojis and gifs.
 - **User Authentication**: Implement user accounts for personalized experiences and secure login.
-- **Video & Audio Chat**: Integrate video and voice communication features.
-- **Dark Mode**: Introduce dark theme support for night-time chatting.
+- **More styles**: Add a collection of new styles.
+- **MiniGames**: MiniGames to play with your friends.
+
 
 ---
 
