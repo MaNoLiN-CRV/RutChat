@@ -1,8 +1,7 @@
 
 import {chatPrint} from './HandleChat';
 
-
-
+// ESTA PUTÍSIMA CARPETA NO VA AQUI , FELIX CUANDO LEAS ESTO CAMBIALA DE LUGAR CABRONAZO
 export function filterCommand(command) {
   
     switch (command) {
