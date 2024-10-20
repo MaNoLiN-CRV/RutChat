@@ -1,5 +1,3 @@
-
-
 export class CommandHandler {
 
   constructor(socket, chatHandler) {
@@ -36,56 +34,60 @@ export class CommandHandler {
         break;
       };
 
-      case command.includes("/download"):{
-        let filename = command.split("/download ")[1];
-        let downloader = document.getElementById("downloadLink");
-        downloader.href = '/uploads/' + filename;
-        downloader.click();
-    
-        this.chatHandler.chatPrint("File " + filename + " downloaded." , "lightgreen")
-      }
-
-      case command.startsWith("/changeBloste"): {
-        const theme = command.split("/changeBloste ")[1];
-        handleBlosteChange(theme);
-      };
       
       default:
+
+
+        if (command.includes("/download")){
+          let filename = command.split("/download ")[1];
+          let downloader = document.getElementById("downloadLink");
+          downloader.href = '/uploads/' + filename;
+          downloader.click();
+          this.chatHandler.chatPrint("File " + filename + " downloaded." , "lightgreen")
+         
+        } else if (command.includes("/bloste")){
+          
+          const theme = command.split("/bloste ")[1];
+          this.handleBlosteChange(theme);
+        };
+
         this.chatHandler.chatPrint("No command found.");
         break; 
+
     }
 
   this.chatHandler.messageInput.value = "";
 
+  }
+
+  handleBlosteChange(theme) {
+    
+   // Cambia los temas, por defecto, es Sea
+
+    switch (theme) {
+        case "sea": {
+            document.documentElement.setAttribute('data-theme', 'sea');
+            this.chatHandler.chatPrint("Tema cambiado a Sea Bloste");
+            break;
+        }
+        case "bloste": {
+            document.documentElement.setAttribute('data-theme', 'bloste');
+            this.chatHandler.chatPrint("Tema cambiado a Bloste");
+            break;
+        }
+        case "nordic": {
+            document.documentElement.setAttribute('data-theme', 'nordic');
+            this.chatHandler.chatPrint("Tema cambiado a Nordic");
+            break;
+        }
+        default:
+          this.chatHandler.chatPrint("¿Qué cojonazos? No existe " + theme);
+            break;
+    }}
+
 }
 
-handleBlosteChange(theme) {
 
-  // Removemos el /# del inicio del comando para obtener solo el nombre del tema
-  const themeName = theme.replace('/#', '');
-  
-  switch (themeName) {
-      case "sea": {
-          document.documentElement.setAttribute('data-theme', 'sea');
-          this.chatHandler.chatPrint("Tema cambiado a Sea Bloste");
-          break;
-      }
-      case "bloste": {
-          document.documentElement.setAttribute('data-theme', 'bloste');
-          this.chatHandler.chatPrint("Tema cambiado a Bloste");
-          break;
-      }
-      case "nordic": {
-          document.documentElement.setAttribute('data-theme', 'nordic');
-          this.chatHandler.chatPrint("Tema cambiado a Nordic");
-          break;
-      }
-      default:
-        this.chatHandler.chatPrint("¿Qué cojonazos? No existe ese tema");
-          break;
-  }}
-
-}
 
  
 

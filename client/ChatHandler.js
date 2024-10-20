@@ -10,44 +10,52 @@ export class ChatHandler {
         this.messageInput = document.getElementById('messageInput');
         this.sendButton = document.getElementById('sendButton');
 
-        this.CommandHandler = new CommandHandler(socket, this);
+        // Crea un manejador de comandos
+        this.commandHandler = new CommandHandler(socket, this);
+
+        // Crea un listener para el boton de enviar
+        this.sendButton.addEventListener('click', () => this.sendMessage());
+
     }
 
     chatPrint(text, options) {
+
         let newMessage;
         // Si options es un string y es "specialblost", manejamos el caso especial
         if (options === "special") {
           newMessage = document.createElement("h");
           newMessage.textContent = text;
           newMessage.style.color = "blue"; 
-          messagesDiv.appendChild(newMessage);
+          this.messagesDiv.appendChild(newMessage);
         } 
         // Si es un string y no es "special", es un puto jodido bloste color bloste blostiroide
         else if (typeof options != null) {
           newMessage = document.createElement("p");
           newMessage.textContent = text;
-          messagesDiv.appendChild(newMessage).style.color = options;
-          messagesDiv.appendChild(newMessage);
+          this.messagesDiv.appendChild(newMessage).style.color = options;
+          this.messagesDiv.appendChild(newMessage);
         } else if (options == null){
           newMessage = document.createElement("p");
           newMessage.textContent = text;
-          messagesDiv.appendChild(newMessage);
+          this.messagesDiv.appendChild(newMessage);
         }
-        messagesDiv.scrollTop = messagesDiv.scrollHeight; // Mantiene el scroll en la parte inferior BLOSTEJAJA
+        this.messagesDiv.scrollTop = this.messagesDiv.scrollHeight; // Mantiene el scroll en la parte inferior BLOSTEJAJA
       }
 
-      
-
+      // Envia el mensaje al servidor
       sendMessage(){
-        const message = messageInput.value;
+        const message = this.messageInput.value;
          if (message && !message.includes("/")) {
-          socket.emit("message", message);
-          messageInput.value = "";
+          this.socket.emit("message", message);
+          this.messageInput.value = "";
          } else {
-         filterCommand(message);
+         this.commandHandler.handleCommand(message);
          }
 
       }
+
+
+      
 
       
         

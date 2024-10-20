@@ -9,7 +9,8 @@ import https from 'https';
 
 export class Server {
   private _app: express.Application;
-  private _httpsServer: https.Server  = new https.Server;
+  // PERO QUE POLLAS HACIAS CREANDO AQUI EL PUTISIMO HTTPS SERVER, DESGRACIADO DE MIERDA
+  private _httpsServer: https.Server;
   private _io: SocketServer;
   private _config: SalaConfig;
   private _storage: CustomStorage;
@@ -25,7 +26,10 @@ export class Server {
     this._ID = id;
     // The http server delegates the http requests to our Express framework.
     this._app = express();
-    this._io = new SocketServer();
+
+    // CONFIGURAMOS LOS BLOSTES ANTES DE HACER NADA
+
+    
 
     this._config = new SalaConfig().build()
       .setDefaultWelcome("Server: Welcome to RutChat by MaNoLiN & Félix !!! use /help")
@@ -37,22 +41,43 @@ export class Server {
       .setSecretPass("secret");
 
     this._storage = new CustomStorage(this._ID);
+
     // We serve the static files in the "public" folder
     this._app.use(express.static("./client"));
     this._app.use(express.static(this._storage.getPublicFolder()));
 
-    this._customFileTransfer = new CustomFileTransfer(this._config, this._app, this._io, this._storage);
+    // AHORA SI, CREAMOS PRIMERO EL SERVIDOR Y LUEGO EL SOCKET SERVER CON ESE SERVIDOR HTTPS.
+    // EL OTRO SERVIDOR HTTPS QUE HACIAS LOS ATRIBUTOS ESTABA VACIO PUTO LERDO, ENCIMA LUEGO GENERABAS OTRO
+    // ME CAGO EN DIOS BLOSTE
 
-    // THIS ALWAYS HAS TO BE AT THE FINAL BLOCK
+    this._httpsServer = https.createServer(this._config.certificates, this._app);
+
+
+
+    // CON TODO CONFIGURADO, CREAMOS EL SOCKET SERVER.
+    this._io = new SocketServer(this._httpsServer);
+
+
+    // COMPONENTES QUE DEPENDEN DE SOCKET IO.
+    this._customFileTransfer = new CustomFileTransfer(this._config, this._app, this._io, this._storage);
     this._eventsManager = new events(this._io, this._config, this._storage);
   }
 
   public start(port: number) {
-    this._httpsServer = https.createServer(this._config.certificates, this._app);
+    // POR QUE MIERDAS CREAS AHORA OTRO PUTO SERVIDOR ???? ME CAGO EN LA VIRGEN
+    //this._httpsServer = https.createServer(this._config.certificates, this._app);
+
     this._httpsServer.listen(port, () => {
       console.log("Server listening in https://localhost:" + port);
     });
   }
+
+ 
+
+
+
+
+
 
   // GETTERS AND SETTERS
 
