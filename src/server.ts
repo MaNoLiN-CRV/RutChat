@@ -1,16 +1,16 @@
 import express from "express";
-import { Server, Socket } from "socket.io";
-import { SalaConfig } from "./SalaConfig.ts";
-import { CustomStorage } from "./CustomStorage.ts";
-import { CustomFileTransfer } from "./CustomFileTransfer.ts";
-import { events } from "./events/events.ts";
+import { Server as SocketServer } from "socket.io";
+import { SalaConfig } from "./SalaConfig";
+import { CustomStorage } from "./CustomStorage";
+import { CustomFileTransfer } from "./CustomFileTransfer";
+import { events } from "./events/events";
 import * as console from "console";
-const https = require('https');
-export class server {
+import https from 'https';
 
+export class Server {
   private _app: express.Application;
-  private _httpsServer = https;
-  private _io: Server;
+  private _httpsServer: https.Server  = new https.Server;
+  private _io: SocketServer;
   private _config: SalaConfig;
   private _storage: CustomStorage;
   private _customFileTransfer: CustomFileTransfer;
@@ -23,9 +23,9 @@ export class server {
    */
   constructor(id: number) {
     this._ID = id;
-    // The http server delegates the http requets to our Express framework.
+    // The http server delegates the http requests to our Express framework.
     this._app = express();
-    this._io = new Server(this._httpsServer);
+    this._io = new SocketServer();
 
     this._config = new SalaConfig().build()
       .setDefaultWelcome("Server: Welcome to RutChat by MaNoLiN & Félix !!! use /help")
@@ -37,18 +37,19 @@ export class server {
       .setSecretPass("secret");
 
     this._storage = new CustomStorage(this._ID);
-    // We serve the statics files in the "public" folder
+    // We serve the static files in the "public" folder
     this._app.use(express.static("./client"));
     this._app.use(express.static(this._storage.getPublicFolder()));
 
     this._customFileTransfer = new CustomFileTransfer(this._config, this._app, this._io, this._storage);
 
-    // THIS ALWAYS HAS TO BE AT THE FINAL BLOSTE
+    // THIS ALWAYS HAS TO BE AT THE FINAL BLOCK
     this._eventsManager = new events(this._io, this._config, this._storage);
-  };
+  }
 
   public start(port: number) {
-    this._httpsServer.createServer(this._config.certificates, this.app).listen(port, () => {
+    this._httpsServer = https.createServer(this._config.certificates, this._app);
+    this._httpsServer.listen(port, () => {
       console.log("Server listening in https://localhost:" + port);
     });
   }
@@ -59,8 +60,7 @@ export class server {
     return this._app;
   }
 
-
-  get io(): Server {
+  get io(): SocketServer {
     return this._io;
   }
 
@@ -87,9 +87,8 @@ export class server {
   get id(): number {
     return this._ID;
   }
+  
   set id(value: number) {
     this._ID = value;
   }
-
 }
-

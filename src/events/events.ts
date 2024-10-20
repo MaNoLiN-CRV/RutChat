@@ -3,6 +3,8 @@ import { client } from "../clients/client.ts";
 import { SalaConfig } from "../SalaConfig.ts";
 import { CustomStorage } from "../CustomStorage.ts";
 
+
+
 export class events {
   io: Server;
   currenUsers:number = 0;
@@ -38,7 +40,7 @@ export class events {
       // ENUMERATION OF SERVER FILES EVENT
       socket.on("files", () => {
         socket.emit("files", 
-          this.storage.filenames(this.storage.getPublicFolder() + this.storage.getUploadPath()).toString());
+          this.storage.filenames(this.storage.getPublicFolder() + this.storage.getUploadPath()));
       });
 
       // USERNAME EVENT BLOSTEVENT
