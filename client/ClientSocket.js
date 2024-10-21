@@ -5,9 +5,12 @@ export class ClientSocket {
     
     constructor() {
         
+
         this.socket = io();
         this.chatHandler = new ChatHandler(this.socket);
         this.initialize();
+
+
     }
 
     initialize() {

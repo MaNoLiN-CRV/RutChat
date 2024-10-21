@@ -15,6 +15,13 @@ export class ChatHandler {
 
         // Crea un listener para el boton de enviar
         this.sendButton.addEventListener('click', () => this.sendMessage());
+        // Crea listener para enter 
+        this.messageInput.addEventListener('keypress', (e) => {
+          if (e.key === "Enter") {
+            this.sendMessage();
+          }
+        });
+
 
     }
 
@@ -49,7 +56,8 @@ export class ChatHandler {
           this.socket.emit("message", message);
           this.messageInput.value = "";
          } else {
-         this.commandHandler.handleCommand(message);
+         // DEPRECATED this.commandHandler.handleCommand(message);
+          this.commandHandler.commandArgumenter(message);
          }
 
       }

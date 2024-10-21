@@ -30,14 +30,13 @@ export class ClientLogin{
             const username = this.usernameInput.value;
             const password = this.passwordInput.value;
 
-            // Emite el Socket con el password y el username
+            // Emite el Socket con el password
 
             this.socket.emit("login", password);
-            this.socket.emit("username", username);
+            
               
             this.socket.on("login", (login) => {
               if (login) {
-                alert("Login successful.");
 
                 // Desconecta el Socket temporal 
                 // y crea un nuevo Socket con el username y password
@@ -45,8 +44,11 @@ export class ClientLogin{
                 this.socket.disconnect();
                 
 
-                new ClientSocket({ username, password });
+                const nuevoSocket = new ClientSocket();
+                nuevoSocket.socket.emit("username", username);
+
                 
+
                 this.passwordModal.style.display = "none";
                 this.mainContent.style.display = "initial";
                

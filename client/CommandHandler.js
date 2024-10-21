@@ -1,62 +1,78 @@
 export class CommandHandler {
 
+  
+
   constructor(socket, chatHandler) {
+
+   
+
     this.socket = socket;
     this.chatHandler = chatHandler;
   }
   
-  handleCommand(command) {
-    switch (command) {
-      case "/help": {
-        this.chatHandler.chatPrint(helpOptions,'#16f4fc');
-        break;
-      };
-      case "/files": {
-        this.socket.emit("files");
-        break;
-      };
-      case "/put on": {
-        const fileUploader = document.getElementById("file-up");
-        fileUploader.style.display = "initial";
-        break;
-      };
-      case "/put off": {
-        const fileUploader = document.getElementById("file-up");
-        fileUploader.style.display = "none";
-        break;
-      }
-      case "/clear":{
-        this.chatHandler.messagesDiv.innerHTML = "";
-        break;
-      };
-      case "/styles":{
-        this.chatHandler.chatPrint(styles, 'white');
-        break;
-      };
+  commandArgumenter(command){
 
-      
-      default:
+    const BLOSTE_COMMANDS = "Uso de bloste: /bloste [tema]. Temas: sea, bloste, nordic.";
+    const DOWNLOAD_COMMANDS = "Uso de download: /download [nombre del archivo].";
+    const PUT_COMMANDS = "Uso de put: /put [on/off].";
+
+    // Dividiendo el comando en base y argumentos
+    let baseCommand = command.split(" ")[0];
+    let argumentsCommand = command.split(" ").slice(1);
+
+    
+    switch (baseCommand) {
 
 
-        if (command.includes("/download")){
-          let filename = command.split("/download ")[1];
-          let downloader = document.getElementById("downloadLink");
-          downloader.href = '/uploads/' + filename;
-          downloader.click();
-          this.chatHandler.chatPrint("File " + filename + " downloaded." , "lightgreen")
-         
-        } else if (command.includes("/bloste")){
-          
-          const theme = command.split("/bloste ")[1];
-          this.handleBlosteChange(theme);
+        case "/put": {
+          if (argumentsCommand === "on") {
+            const fileUploader = document.getElementById("file-up");
+            fileUploader.style.display = "initial";
+          } else if (argumentsCommand === "off") {
+            const fileUploader = document.getElementById("file-up");
+            fileUploader.style.display = "none";
+          } else {
+            this.chatHandler.chatPrint(PUT_COMMANDS);
+          }
+          break;
+        }
+
+        case "/bloste": {
+            if (argumentsCommand.length === 1 ) {
+              this.handleBlosteChange(argumentsCommand);
+            } else {
+              this.chatHandler.chatPrint(BLOSTE_COMMANDS);
+            }
+          break;
+        }
+        case "/download": {
+          if (argumentsCommand) {
+            this.socket.emit("download", argumentsCommand);
+          } else {
+            this.chatHandler.chatPrint(DOWNLOAD_COMMANDS);
+          }
+          break;
+        }
+        case "/help": {
+          // TODO ADD HELP OPTIONS 
+          this.chatHandler.chatPrint(helpOptions,'#16f4fc');
+          break;
+        };
+        case "/files": {
+          this.socket.emit("files");
+          break;
+        };
+        case "/clear":{
+          this.chatHandler.messagesDiv.innerHTML = "";
+          break;
         };
 
-        this.chatHandler.chatPrint("No command found.");
-        break; 
+        default:
+          this.chatHandler.chatPrint("¿Qué cojonazos? No existe " + baseCommand);
+          break;
 
     }
-
-  this.chatHandler.messageInput.value = "";
+    this.chatHandler.messageInput.value = "";
 
   }
 
@@ -84,6 +100,11 @@ export class CommandHandler {
           this.chatHandler.chatPrint("¿Qué cojonazos? No existe " + theme);
             break;
     }}
+
+
+   
+
+    
 
 }
 
