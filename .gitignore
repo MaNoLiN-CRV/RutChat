@@ -1,5 +1,5 @@
 /node_modules
 /src/certs/server.key
-
+/.env
 /.public*
 /.idea
