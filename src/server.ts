@@ -2,7 +2,7 @@ import express from "express";
 import { Server as SocketServer } from "socket.io";
 import { SalaConfig } from "./SalaConfig";
 import { CustomStorage } from "./CustomStorage";
-import { CustomFileTransfer } from "./CustomFileTransfer";
+import { CustomFileTransfer } from "./Endpoints";
 import { events } from "./events/events";
 import * as console from "console";
 import https from 'https';

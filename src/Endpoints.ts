@@ -22,6 +22,7 @@ export class CustomFileTransfer {
         this.storage = storage;
         this.salaConfig = salaConfig;
         this.app = app;
+        app.use(express.json());
         this.io = io;
         this.upload = multer({
             storage: this.storage.getStorage(),
@@ -45,7 +46,7 @@ export class CustomFileTransfer {
         });
 
         // FILE UPLOAD FOLDER GET CONFIG
-        app.get(this.storage.getUploadPath() + ":filename", (req, res) => {
+        this.app.get(this.storage.getUploadPath() + ":filename", (req, res) => {
             const filePath = this.storage.getPublicFolder() + this.storage.getUploadPath();
             // If file exists
             if (fs.existsSync(filePath)) {
@@ -55,8 +56,17 @@ export class CustomFileTransfer {
             }
         });
 
-
-
+        // TEMPORAL LOGIN (will be deleted when the database is deployed)
+        this.app.post("/login", (req,res) => {
+            const loginJson = req.body;
+            const password = loginJson.password;
+            if (password === salaConfig.getSecretPass()){
+                res.json({signed:true});
+            }
+            else {
+                res.json({signed:false});
+            }
+        });
     }
 
 }

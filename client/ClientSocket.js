@@ -1,16 +1,11 @@
-
 import { ChatHandler } from "./ChatHandler.js";
 
 export class ClientSocket {
-    
-    constructor() {
-        
-
+    constructor(username) {
         this.socket = io();
+        this.socket.emit("username", username);
         this.chatHandler = new ChatHandler(this.socket);
         this.initialize();
-
-
     }
 
     initialize() {
