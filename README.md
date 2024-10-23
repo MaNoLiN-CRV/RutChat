@@ -1,8 +1,8 @@
 ---
 
-# 💬 **Chat App - React, Express & Sockets** 🌐
+# 💬 **RutChat - React, Express & Sockets** 🌐
 
-¡Bienvenid@ a **ChatApp**! 🚀  
+¡Bienvenid@ a **RutChat**! 🚀  
 Esta aplicación de mensajería en tiempo real te permite chatear y enviar archivos tanto desde tu ordenador como desde tu móvil 📱, con una interfaz moderna y responsiva. ¡Todo implementado con **TypeScript** en el servidor y el cliente! ⚡
 
 ## 🚀 **Características**
