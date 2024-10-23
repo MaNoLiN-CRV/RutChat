@@ -1,21 +1,26 @@
-import express, { Express, Request, Response } from 'express';
-
-import { Server as SocketIOSv, Socket } from 'socket.io';
-import { Server } from "http";
-
-// PRUEBA, MODIFICA TU EL PUTO BLOSTE
+import express, { Express } from 'express';
+import { Server } from 'http';
+import { Server as SocketIOServer } from 'socket.io';
+import cors from 'cors';
 
 const app: Express = express();
-
 const httpServer: Server = new Server(app);
 
-const io = new SocketIOSv(httpServer);
+// Configure CORS for both Express and Socket.IO
+app.use(cors({
+    origin: ["http://localhost:8081", "http://localhost:3000"],
+    methods: ["GET", "POST"],
+    credentials: true
+}));
 
-app.use(express.json());
+const io: SocketIOServer = new SocketIOServer(httpServer);
 
 const port: number = 3000;
 
-app.use(express.static('public'));
+httpServer.listen(port, () => {
+    console.log(`Server running on port ${port}`);
+});
 
-
-
+io.on("connection", (socket) => {
+    console.log("Connected to socket");
+});

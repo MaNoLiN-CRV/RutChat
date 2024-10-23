@@ -2,6 +2,7 @@
 
 # dependencies
 node_modules/
+../rutchat-server/node_modules/
 
 # Expo
 .expo/
