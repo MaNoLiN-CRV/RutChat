@@ -4,6 +4,7 @@ import { SalaConfig } from "./SalaConfig.ts";
 import express from "express";
 import { Server } from "socket.io";
 import * as fs from 'fs';
+import { jwtManager } from "jwt/jwtManager.ts";
 export class CustomFileTransfer {
 
     storage: CustomStorage;
@@ -11,6 +12,7 @@ export class CustomFileTransfer {
     upload: multer.Multer;
     app: express.Application;
     io: Server
+    validator = jwtManager.authenticateToken;
     /**
      * File transfer class constructor
      * @param salaConfig Configuration of the chat
@@ -18,7 +20,7 @@ export class CustomFileTransfer {
      * @param io IO socket server
      * @param storage Custom storage of the chat
      */
-    constructor(salaConfig: SalaConfig, app: express.Application, io: Server , storage: CustomStorage) {
+    constructor(salaConfig: SalaConfig, app: express.Application, io: Server, storage: CustomStorage) {
         this.storage = storage;
         this.salaConfig = salaConfig;
         this.app = app;
@@ -28,11 +30,11 @@ export class CustomFileTransfer {
             storage: this.storage.getStorage(),
             limits: { fileSize: salaConfig.maxFileSizeMb * 1024 * 1024 },
         });
-            
-        
+
+
         //POST FILE UPLOAD CONFIGURATION (Vlosty)
-         
-        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), (req, res) => {
+
+        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator, (req, res) => {
             if (!req.file) {
                 return res.status(400).send("Error uploading the file.");
             }
@@ -46,7 +48,7 @@ export class CustomFileTransfer {
         });
 
         // FILE UPLOAD FOLDER GET CONFIG
-        this.app.get(this.storage.getUploadPath() + ":filename", (req, res) => {
+        this.app.get(this.storage.getUploadPath() + ":filename", this.validator ,(req, res) => {
             const filePath = this.storage.getPublicFolder() + this.storage.getUploadPath();
             // If file exists
             if (fs.existsSync(filePath)) {
@@ -57,14 +59,15 @@ export class CustomFileTransfer {
         });
 
         // TEMPORAL LOGIN (will be deleted when the database is deployed)
-        this.app.post("/login", (req,res) => {
+        this.app.post("/login", (req, res) => {
             const loginJson = req.body;
+            const username = loginJson.username;
             const password = loginJson.password;
-            if (password === salaConfig.getSecretPass()){
-                res.json({signed:true});
+            if (password === salaConfig.getSecretPass()) {
+                res.json({ token: jwtManager.generateAccessToken(username) });
             }
             else {
-                res.json({signed:false});
+                res.json({ token: "" });
             }
         });
     }

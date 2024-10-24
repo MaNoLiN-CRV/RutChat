@@ -1,0 +1,11 @@
+{
+    "background.fullscreen": {
+
+        "images": ["https://www.enwallpaper.com/wp-content/uploads/2023/07/4oyskqy2zxg71.jpg"],
+        "opacity": 0.95,
+        "size": "cover",
+        "position": "center",
+        "interval": 0,
+        "random": false
+    }
+}

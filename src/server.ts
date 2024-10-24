@@ -27,10 +27,6 @@ export class Server {
     // The http server delegates the http requests to our Express framework.
     this._app = express();
 
-    // CONFIGURAMOS LOS BLOSTES ANTES DE HACER NADA
-
-    
-
     this._config = new SalaConfig().build()
       .setDefaultWelcome("Server: Welcome to RutChat by MaNoLiN & Félix !!! use /help")
       .setMaxMessageLength(200)
@@ -46,13 +42,7 @@ export class Server {
     this._app.use(express.static("./client"));
     this._app.use(express.static(this._storage.getPublicFolder()));
 
-    // AHORA SI, CREAMOS PRIMERO EL SERVIDOR Y LUEGO EL SOCKET SERVER CON ESE SERVIDOR HTTPS.
-    // EL OTRO SERVIDOR HTTPS QUE HACIAS LOS ATRIBUTOS ESTABA VACIO PUTO LERDO, ENCIMA LUEGO GENERABAS OTRO
-    // ME CAGO EN DIOS BLOSTE
-
     this._httpsServer = https.createServer(this._config.certificates, this._app);
-
-
 
     // CON TODO CONFIGURADO, CREAMOS EL SOCKET SERVER.
     this._io = new SocketServer(this._httpsServer);
@@ -64,19 +54,10 @@ export class Server {
   }
 
   public start(port: number) {
-    // POR QUE MIERDAS CREAS AHORA OTRO PUTO SERVIDOR ???? ME CAGO EN LA VIRGEN
-    //this._httpsServer = https.createServer(this._config.certificates, this._app);
-
     this._httpsServer.listen(port, () => {
       console.log("Server listening in https://localhost:" + port);
     });
   }
-
- 
-
-
-
-
 
 
   // GETTERS AND SETTERS
