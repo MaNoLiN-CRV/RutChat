@@ -1,6 +1,7 @@
 // HomeScreen.jsx
 import { View, Text, StyleSheet } from 'react-native'
 import React from 'react'
+import ChatComponent from '../components/Chat/ChatComponent';
 
 
 
@@ -10,6 +11,8 @@ export default function HomeScreen( {socket}, {navigation}) {
     <View style={styles.container}>
 
       <Text style={styles.text}>HomeScreen</Text>
+
+      <ChatComponent socket={socket}/>
       
     </View>
   )
@@ -18,8 +21,7 @@ export default function HomeScreen( {socket}, {navigation}) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
+    
   },
   text: {
     fontSize: 24,

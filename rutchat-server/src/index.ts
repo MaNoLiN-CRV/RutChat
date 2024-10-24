@@ -10,7 +10,6 @@ const httpServer: Server = new Server(app);
 app.use(cors({
     origin: ["http://localhost:8081", "http://localhost:3000"],
     methods: ["GET", "POST"],
-    credentials: true
 }));
 
 const io: SocketIOServer = new SocketIOServer(httpServer);
@@ -22,5 +21,11 @@ httpServer.listen(port, () => {
 });
 
 io.on("connection", (socket) => {
-    console.log("Connected to socket");
+    
+    console.log(`Conectado desde ${socket}`);
+
+    socket.on("message", (msg) => {
+        io.emit("message", msg);
+    })
+
 });

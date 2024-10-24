@@ -13,7 +13,7 @@ const Stack = createNativeStackNavigator();
 
 export default function App() {
 
-  const socket = io('http://localhost:3000', {
+  const socket = io('http://192.168.11.4:3000', {
 
     //Establece la conexión más rápido USAR WEBSOCKET, en vez de Polling
     //Evita la complejidad del proceso de actualización
@@ -23,45 +23,38 @@ export default function App() {
     // HTTP Polling (falla por CORS), por eso ponemos solo websocket
 
     transports: ['websocket'],
-    withCredentials: true
 }); 
 
+  console.log(socket);
   return (
-   
-
-
-<NavigationContainer>
+    <NavigationContainer>
       <Stack.Navigator 
         initialRouteName="Login"
         screenOptions={{
-          headerShown: false,  // Oculta el header en todas las pantallas
-          gestureEnabled: false, // Desactiva el gesto de "swipe back"
+          headerShown: false,
+          gestureEnabled: false,
         }}
       >
-
         <Stack.Screen 
           name="Login" 
           component={LoginScreen} 
-          options={{
-            headerShown: false,
-            gestureEnabled: false,
-          }}
         />
         <Stack.Screen 
           name="Home" 
-          // PASO LAS PROPOS PRETERMINADAS CON EL SPREAD OPERATOR
-          component={(props: any) => <HomeScreen {...props} socket={socket} />}
           options={{
-            headerLeft: () => null, // Elimina el botón de "back"
-            gestureEnabled: false,  // Desactiva el gesto de "swipe back"
+            headerLeft: () => null,
+            gestureEnabled: false,
           }}
-        />
-        
+        >
+
+          {(props) => <HomeScreen {...props} socket={socket} />}
+
+        </Stack.Screen>
+
+
+
       </Stack.Navigator>
       <StatusBar style="auto" />
     </NavigationContainer>
-      
-   
-      
   );
 }
