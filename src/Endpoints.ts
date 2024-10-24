@@ -4,7 +4,7 @@ import { SalaConfig } from "./SalaConfig.ts";
 import express from "express";
 import { Server } from "socket.io";
 import * as fs from 'fs';
-import { jwtManager } from "jwt/jwtManager.ts";
+import { jwtManager } from "./jwt/jwtManager.ts";
 export class CustomFileTransfer {
 
     storage: CustomStorage;
@@ -31,7 +31,19 @@ export class CustomFileTransfer {
             limits: { fileSize: salaConfig.maxFileSizeMb * 1024 * 1024 },
         });
 
+        // CHAT PROTECTION
 
+        this.app.get("/client/chat/", this.validator , (req, res) => {
+            const filePath = __dirname + req.path;
+            if (fs.existsSync(filePath)){
+                res.sendFile(filePath)
+            }
+            else {
+                res.status(404).send("FILE NOT FOUND :(")
+            }
+            
+        });
+ 
         //POST FILE UPLOAD CONFIGURATION (Vlosty)
 
         this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator, (req, res) => {
@@ -63,11 +75,13 @@ export class CustomFileTransfer {
             const loginJson = req.body;
             const username = loginJson.username;
             const password = loginJson.password;
-            if (password === salaConfig.getSecretPass()) {
+            if (password == salaConfig.getSecretPass()) {
                 res.json({ token: jwtManager.generateAccessToken(username) });
+                console.log("Login SUCCESS: " + username)
             }
             else {
                 res.json({ token: "" });
+                console.log("Login failed: " + username + " | password: " + password);
             }
         });
     }
