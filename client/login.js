@@ -34,7 +34,7 @@ class login {
             // SAVES THE TOKEN
             document.cookie = `token=${data.token}`;
             // REDIRECT THE USER TO THE CHAT
-            window.location.replace(window.location.origin + "chat/chat.html");
+            window.location.replace(window.location.origin + "/chat/chat.html");
           } else {
             this.passwordInput.value = "";
             this.usernameInput.value = "";

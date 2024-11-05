@@ -1,19 +1,22 @@
 import dotenv from 'dotenv';
 import { Request, Response, NextFunction } from 'express';
-const jwt = require('jsonwebtoken');
+import jwt from 'jsonwebtoken';
+
 export class jwtManager {
-    static secretToken: string | undefined;
+   secretToken: string;
+
    constructor() {
     dotenv.config();
-    jwtManager.secretToken = process.env.TOKEN_SECRET;
+    this.secretToken = process.env.TOKEN_SECRET as string;
+   
    }
    /**
     * Creates a new jwt
     * @param username 
     * @returns 
     */
-   static generateAccessToken(username: string) : string {
-    return jwt.sign(username, jwtManager.secretToken, { expiresIn: '100000s' });
+   generateAccessToken(username: string) : string {
+    return jwt.sign(username, this.secretToken);
   }
   /**
    * 
@@ -21,7 +24,7 @@ export class jwtManager {
    * @param res Response
    * @param next Next function will be executed if the token is valid
    */
-  static authenticateToken(req: Request, res: Response, next: NextFunction): void {
+  authenticateToken(req: Request, res: Response, next: NextFunction){
     const authHeader = req.headers['authorization'];
     const token = authHeader && authHeader.split(' ')[1];
   
@@ -29,7 +32,7 @@ export class jwtManager {
       res.sendStatus(401); 
     }
   
-    jwt.verify(token, process.env.TOKEN_SECRET as string, (err: Error, user : string) => {
+    jwt.verify(token as string, this.secretToken, (err: any, user: any) => {
       if (err) {
         return res.sendStatus(403);
       }

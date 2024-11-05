@@ -12,7 +12,7 @@ export class CustomFileTransfer {
     upload: multer.Multer;
     app: express.Application;
     io: Server
-    validator = jwtManager.authenticateToken;
+    validator : jwtManager;
     /**
      * File transfer class constructor
      * @param salaConfig Configuration of the chat
@@ -21,6 +21,7 @@ export class CustomFileTransfer {
      * @param storage Custom storage of the chat
      */
     constructor(salaConfig: SalaConfig, app: express.Application, io: Server, storage: CustomStorage) {
+        this.validator = new jwtManager();
         this.storage = storage;
         this.salaConfig = salaConfig;
         this.app = app;
@@ -33,7 +34,7 @@ export class CustomFileTransfer {
 
         // CHAT PROTECTION
 
-        this.app.get("/client/chat/", this.validator , (req, res) => {
+        this.app.get("/client/chat/", this.validator.authenticateToken , (req, res) => {
             const filePath = __dirname + req.path;
             if (fs.existsSync(filePath)){
                 res.sendFile(filePath)
@@ -46,7 +47,7 @@ export class CustomFileTransfer {
  
         //POST FILE UPLOAD CONFIGURATION (Vlosty)
 
-        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator, (req, res) => {
+        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator.authenticateToken, (req, res) => {
             if (!req.file) {
                 return res.status(400).send("Error uploading the file.");
             }
@@ -60,7 +61,7 @@ export class CustomFileTransfer {
         });
 
         // FILE UPLOAD FOLDER GET CONFIG
-        this.app.get(this.storage.getUploadPath() + ":filename", this.validator ,(req, res) => {
+        this.app.get(this.storage.getUploadPath() + ":filename", this.validator.authenticateToken ,(req, res) => {
             const filePath = this.storage.getPublicFolder() + this.storage.getUploadPath();
             // If file exists
             if (fs.existsSync(filePath)) {
@@ -76,7 +77,7 @@ export class CustomFileTransfer {
             const username = loginJson.username;
             const password = loginJson.password;
             if (password == salaConfig.getSecretPass()) {
-                res.json({ token: jwtManager.generateAccessToken(username) });
+                res.json({ token: this.validator.generateAccessToken(username) });
                 console.log("Login SUCCESS: " + username)
             }
             else {

@@ -1,13 +1,9 @@
-import { ClientLogin } from './ClientLogin.js';
+import {ClientSocket} from './ClientSocket.js'
 
 
 class ChatClient {
     constructor() {
-
-        // Iniciar con el login
-        this.login = new ClientLogin();
-
-        
+        this.ClientSocket = new ClientSocket("bloste");
         }
         
     }
