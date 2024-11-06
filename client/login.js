@@ -30,7 +30,7 @@ class login {
           return res.json();
         }, this.connectionLost)
         .then((data) => {
-          if (data.token != undefined) {
+          if (data.token != '') {
             // SAVES THE TOKEN
             document.cookie = `token=${data.token}`;
             // REDIRECT THE USER TO THE CHAT

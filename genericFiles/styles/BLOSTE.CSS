@@ -1,19 +1,17 @@
-
-
 :root {
     --claro: #d2e4f1;
     --claro2: #a4c1d3; 
     --claro3:  #8facc0; 
-   
+    
     --oscuro: #484d51; 
     --oscuro2: #818d97; 
     --oscuro3: #9cabb6; 
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
-   
 }
+
 /* sea bloste theme */
-[data-theme= "sea"] {
+[data-theme="sea"] {
     --claro: #d2e4f1;
     --claro2: #8facc0; 
     
@@ -23,19 +21,20 @@
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
 }
+
 /* bloste theme */
-[data-theme= "bloste"] {
+[data-theme="bloste"] {
     --claro: #ff9ebb;
     --claro2: #f740a5; 
     
     --oscuro: #6410ca; 
     --oscuro2: #411097; 
-;
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
 }
+
 /* nordic with blosteTM :v technologies. */
-[data-theme= "nordic"] {
+[data-theme="nordic"] {
     --claro: #eceff4;
     --claro2: #d8dee9; 
     
@@ -45,6 +44,3 @@
     --c-text-primary: var(--claro);
     --c-text-secondary: var(--claro2);
 }
-
-
-

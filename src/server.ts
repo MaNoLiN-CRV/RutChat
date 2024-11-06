@@ -51,6 +51,7 @@ export class Server {
     // COMPONENTES QUE DEPENDEN DE SOCKET IO.
     this._customFileTransfer = new CustomFileTransfer(this._config, this._app, this._io, this._storage);
     this._eventsManager = new events(this._io, this._config, this._storage);
+   
   }
 
   public start(port: number) {
