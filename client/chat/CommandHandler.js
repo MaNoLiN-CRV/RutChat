@@ -15,6 +15,7 @@ export class CommandHandler {
     const BLOSTE_COMMANDS = "Uso de bloste: /bloste [tema]. Temas: sea, bloste, nordic.";
     const DOWNLOAD_COMMANDS = "Uso de download: /download [nombre del archivo].";
     const PUT_COMMANDS = "Uso de put: /put [on/off].";
+    const HELP_OPTIONS = BLOSTE_COMMANDS + "\n" + DOWNLOAD_COMMANDS + "\n" + PUT_COMMANDS
 
     // Dividiendo el comando en base y argumentos
     let baseCommand = command.split(" ")[0];
@@ -55,7 +56,7 @@ export class CommandHandler {
         }
         case "/help": {
           // TODO ADD HELP OPTIONS 
-          this.chatHandler.chatPrint(helpOptions,'#16f4fc');
+          this.chatHandler.chatPrint(HELP_OPTIONS,'#16f4fc');
           break;
         };
         case "/files": {
@@ -78,7 +79,7 @@ export class CommandHandler {
 
   handleBlosteChange(theme) {
     
-   // Cambia los temas, por defecto, es Sea
+   // Cambia los temas, por defecto, es Sea 
 
     switch (theme) {
         case "sea": {

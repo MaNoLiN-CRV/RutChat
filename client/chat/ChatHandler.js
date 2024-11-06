@@ -35,7 +35,7 @@ export class ChatHandler {
           newMessage.style.color = "blue"; 
           this.messagesDiv.appendChild(newMessage);
         } 
-        // Si es un string y no es "special", es un puto jodido bloste color bloste blostiroide
+        // Si es un string y no es "special", es un puto jodido bloste color bloste blostiroide blosterizado negro
         else if (typeof options != null) {
           newMessage = document.createElement("p");
           newMessage.textContent = text;
@@ -56,7 +56,7 @@ export class ChatHandler {
           this.socket.emit("message", message);
           this.messageInput.value = "";
          } else {
-         // DEPRECATED this.commandHandler.handleCommand(message);
+         // BLOSTDEPRECATED this.commandHandler.handleCommand(message);
           this.commandHandler.commandArgumenter(message);
          }
 
