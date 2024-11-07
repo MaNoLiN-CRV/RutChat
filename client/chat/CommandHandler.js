@@ -11,7 +11,6 @@ export class CommandHandler {
   }
   
   commandArgumenter(command){
-    console.log(command)
     const BLOSTE_COMMANDS = "Uso de bloste: /bloste [tema]. Temas: sea, bloste, nordic.";
     const DOWNLOAD_COMMANDS = "Uso de download: /download [nombre del archivo].";
     const PUT_COMMANDS = "Uso de put: /put [on/off].";
@@ -19,10 +18,6 @@ export class CommandHandler {
     // Dividiendo el comando en base y argumentos
     let baseCommand = command.split(" ")[0];
     let argumentsCommand = command.split(" ").slice(1);
-    console.log(command)
-    console.log(argumentsCommand)
-    console.log(baseCommand)
-    
     switch (baseCommand) {
 
 
@@ -72,7 +67,7 @@ export class CommandHandler {
         };
 
         default:
-          this.chatHandler.chatPrint("¿Qué cojonazos? No existe " + baseCommand);
+          this.chatHandler.chatPrint("No existe el comando " + baseCommand);
           break;
 
     }

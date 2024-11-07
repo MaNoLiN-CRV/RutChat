@@ -25,17 +25,23 @@ export class jwtManager {
    * @param next Next function will be executed if the token is valid
    */
   authenticateToken(req: Request, res: Response, next: NextFunction){
-    const authHeader = req.headers['authorization'];
-    const token = authHeader && authHeader.split(' ')[1];
+    
+    const cookies = req.header('cookie');
+    const token = cookies
+        ?.split('; ')
+        .find(cookie => cookie.startsWith('authToken='))
+        ?.split('=')[1];
   
+    console.log(token)
     if (!token) {
-      res.sendStatus(401); 
+      return res.status(401).send("SERVER BLOST SECURITY: NOT LOGGED IN :("); 
     }
   
     jwt.verify(token as string, this.secretToken, (err: any, user: any) => {
       if (err) {
         return res.sendStatus(403);
       }
+      console.log("next");
       next();
     });
   }

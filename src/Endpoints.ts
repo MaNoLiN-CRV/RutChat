@@ -34,7 +34,7 @@ export class CustomFileTransfer {
 
         // CHAT PROTECTION
 
-        this.app.get("/client/chat/", this.validator.authenticateToken , (req, res) => {
+        this.app.get("/chat/chat.html", this.validator.authenticateToken , (req, res) => {
             const filePath = __dirname + req.path;
             if (fs.existsSync(filePath)){
                 res.sendFile(filePath)

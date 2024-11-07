@@ -39,7 +39,7 @@ export class Server {
     this._storage = new CustomStorage(this._ID);
 
     // We serve the static files in the "public" folder
-    this._app.use(express.static("./client"));
+    this._app.use(express.static("./client/login"));
     this._app.use(express.static(this._storage.getPublicFolder()));
 
     this._httpsServer = https.createServer(this._config.certificates, this._app);

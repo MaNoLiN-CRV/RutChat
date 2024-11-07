@@ -27,7 +27,7 @@
     --claro: #ff9ebb;
     --claro2: #f740a5; 
     
-    --oscuro: #6410ca; 
+    --oscuro: black; 
     --oscuro2: #411097; 
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);

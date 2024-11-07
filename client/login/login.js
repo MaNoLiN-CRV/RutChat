@@ -24,7 +24,6 @@ class login {
         body: JSON.stringify({ 
             password: password ,
             username: username
-
         }),
       }).then((res) => {
           return res.json();
@@ -32,7 +31,7 @@ class login {
         .then((data) => {
           if (data.token != '') {
             // SAVES THE TOKEN
-            document.cookie = `token=${data.token}`;
+            document.cookie = `authToken=${data.token}`;
             // REDIRECT THE USER TO THE CHAT
             window.location.replace(window.location.origin + "/chat/chat.html");
           } else {
