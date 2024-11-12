@@ -6,6 +6,7 @@ import { CustomFileTransfer } from "./Endpoints";
 import { events } from "./events/events";
 import * as console from "console";
 import https from 'https';
+import cookieParser from 'cookie-parser';
 
 export class Server {
   private _app: express.Application;
@@ -39,6 +40,7 @@ export class Server {
     this._storage = new CustomStorage(this._ID);
 
     // We serve the static files in the "public" folder
+    this._app.use(cookieParser());
     this._app.use(express.static("./client/login"));
     this._app.use(express.static(this._storage.getPublicFolder()));
 

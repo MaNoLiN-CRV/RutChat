@@ -5,6 +5,7 @@ import express from "express";
 import { Server } from "socket.io";
 import * as fs from 'fs';
 import { jwtManager } from "./jwt/jwtManager.ts";
+import path from "path";
 export class CustomFileTransfer {
 
     storage: CustomStorage;
@@ -34,8 +35,9 @@ export class CustomFileTransfer {
 
         // CHAT PROTECTION
 
-        this.app.get("/chat/chat.html", this.validator.authenticateToken , (req, res) => {
-            const filePath = __dirname + req.path;
+        this.app.get("/chat/*", this.validator.authenticateToken.bind(this.validator) , (req, res) => {
+            const filePath = path.join(__dirname, '..', 'client' + req.path); 
+            console.log(filePath);
             if (fs.existsSync(filePath)){
                 res.sendFile(filePath)
             }
