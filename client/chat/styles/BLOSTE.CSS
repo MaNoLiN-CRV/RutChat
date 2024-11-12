@@ -1,46 +1,107 @@
-:root {
-    --claro: #d2e4f1;
-    --claro2: #a4c1d3; 
-    --claro3:  #8facc0; 
+/* Tema "Cálido" */
+[data-theme="warm"] {
+    --claro: #ffe4b5; /* Lemon Chiffon */
+    --claro2: #ffcc99; /* Peach */
     
-    --oscuro: #484d51; 
-    --oscuro2: #818d97; 
-    --oscuro3: #9cabb6; 
+    --oscuro: #8b4513; /* Saddle Brown */
+    --oscuro2: #d2691e; /* Chocolate */
+    
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
 }
 
-/* sea bloste theme */
+/* Tema "Bosque" */
+[data-theme="forest"] {
+    --claro: #d0f0c0; /* Tea Green */
+    --claro2: #a8d5ba; /* Light Sea Green */
+    
+    --oscuro: #3b5323; /* Dark Olive Green */
+    --oscuro2: #6b8e23; /* Olive Drab */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
+}
+
+/* Tema "Oceánico" */
 [data-theme="sea"] {
-    --claro: #d2e4f1;
-    --claro2: #8facc0; 
+    --claro: #b2e0e6; /* Light Cyan */
+    --claro2: #8dd3f3; /* Sky Blue */
     
-    --oscuro: #484d51; 
-    --oscuro2: #818d97; 
-
+    --oscuro: #003d5b; /* Dark Blue */
+    --oscuro2: #005f73; /* Deep Teal */
+    
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
 }
 
-/* bloste theme */
-[data-theme="bloste"] {
-    --claro: #ff9ebb;
-    --claro2: #f740a5; 
+/* Tema "Atardecer" */
+[data-theme="sunset"] {
+    --claro: #ffb3ba; /* Light Pink */
+    --claro2: #ff677d; /* Pink */
     
-    --oscuro: black; 
-    --oscuro2: #411097; 
+    --oscuro: #900c3f; /* Dark Red */
+    --oscuro2: #c70039; /* Crimson */
+    
     --c-text-primary: var(--oscuro);
     --c-text-secondary: var(--oscuro2);
 }
 
-/* nordic with blosteTM :v technologies. */
-[data-theme="nordic"] {
-    --claro: #eceff4;
-    --claro2: #d8dee9; 
+/* Tema "Neón" */
+[data-theme="neon"] {
+    --claro: #39ff14; /* Neon Green */
+    --claro2: #ff073a; /* Neon Pink */
     
-    --oscuro: #2e3440; 
-    --oscuro2: #4c566a; 
+    --oscuro: #1c1c1c; /* Very Dark Gray */
+    --oscuro2: #3c3c3c; /* Dark Gray */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
+}
 
-    --c-text-primary: var(--claro);
-    --c-text-secondary: var(--claro2);
+/* Tema "Terra" */
+[data-theme="terra"] {
+    --claro: #e4b5a0; /* Light Brown */
+    --claro2: #d6a16a; /* Tan */
+    
+    --oscuro: #5b3a29; /* Dark Brown */
+    --oscuro2: #7d5a3e; /* Saddle Brown */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
+}
+
+/* Tema "Cielo" */
+[data-theme="sky"] {
+    --claro: #a2c2e0; /* Light Blue */
+    --claro2: #e0f7fa; /* Light Cyan */
+    
+    --oscuro: #003366; /* Dark Blue */
+    --oscuro2: #006699; /* Steel Blue */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
+}
+
+/* Tema "Amanecer" */
+[data-theme="sunrise"] {
+    --claro: #ffedcc; /* Light Apricot */
+    --claro2: #ffcc99; /* Peach */
+    
+    --oscuro: #ff6f61; /* Coral */
+    --oscuro2: #e74c3c; /* Red */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
+}
+
+/* Tema "Frío" */
+[data-theme="cold"] {
+    --claro: #d0e1f9; /* Light Sky Blue */
+    --claro2: #a6c8e0; /* Light Blue */
+    
+    --oscuro: #1b3a6d; /* Dark Blue */
+    --oscuro2: #4a90e2; /* Blue */
+    
+    --c-text-primary: var(--oscuro);
+    --c-text-secondary: var(--oscuro2);
 }
