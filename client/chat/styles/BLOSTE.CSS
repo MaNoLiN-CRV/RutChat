@@ -3,11 +3,8 @@
     --claro: #ffe4b5; /* Lemon Chiffon */
     --claro2: #ffcc99; /* Peach */
     
-    --oscuro: #8b4513; /* Saddle Brown */
-    --oscuro2: #d2691e; /* Chocolate */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #3a1f14; /* Darker Brown (más oscuro) */
+    --oscuro2: #7e4b3a; /* Lighter Chocolate (más claro) */
 }
 
 /* Tema "Bosque" */
@@ -15,11 +12,8 @@
     --claro: #d0f0c0; /* Tea Green */
     --claro2: #a8d5ba; /* Light Sea Green */
     
-    --oscuro: #3b5323; /* Dark Olive Green */
-    --oscuro2: #6b8e23; /* Olive Drab */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #1f2a1a; /* Darker Olive Green (más oscuro) */
+    --oscuro2: #4a6e3b; /* Lighter Olive Drab (sin cambios) */
 }
 
 /* Tema "Oceánico" */
@@ -27,11 +21,8 @@
     --claro: #b2e0e6; /* Light Cyan */
     --claro2: #8dd3f3; /* Sky Blue */
     
-    --oscuro: #003d5b; /* Dark Blue */
-    --oscuro2: #005f73; /* Deep Teal */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #001f33; /* Even Darker Blue (sin cambios) */
+    --oscuro2: #007a8c; /* Lighter Deep Teal (más claro) */
 }
 
 /* Tema "Atardecer" */
@@ -39,11 +30,8 @@
     --claro: #ffb3ba; /* Light Pink */
     --claro2: #ff677d; /* Pink */
     
-    --oscuro: #900c3f; /* Dark Red */
-    --oscuro2: #c70039; /* Crimson */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #3f0a1b; /* Darker Red (más oscuro) */
+    --oscuro2: #b7003a; /* Crimson (más claro) */
 }
 
 /* Tema "Neón" */
@@ -51,11 +39,8 @@
     --claro: #39ff14; /* Neon Green */
     --claro2: #ff073a; /* Neon Pink */
     
-    --oscuro: #1c1c1c; /* Very Dark Gray */
-    --oscuro2: #3c3c3c; /* Dark Gray */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #000000; /* Black (más oscuro) */
+    --oscuro2: #3a3a3a; /* Dark Gray (más claro) */
 }
 
 /* Tema "Terra" */
@@ -63,11 +48,8 @@
     --claro: #e4b5a0; /* Light Brown */
     --claro2: #d6a16a; /* Tan */
     
-    --oscuro: #5b3a29; /* Dark Brown */
-    --oscuro2: #7d5a3e; /* Saddle Brown */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #3a2419; /* Darker Dark Brown (sin cambios) */
+    --oscuro2: #5b3a29; /* Lighter Dark Brown (sin cambios) */
 }
 
 /* Tema "Cielo" */
@@ -75,11 +57,8 @@
     --claro: #a2c2e0; /* Light Blue */
     --claro2: #e0f7fa; /* Light Cyan */
     
-    --oscuro: #003366; /* Dark Blue */
-    --oscuro2: #006699; /* Steel Blue */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #001f33; /* Even Darker Blue (sin cambios) */
+    --oscuro2: #004080; /* Lighter Dark Blue (más claro) */
 }
 
 /* Tema "Amanecer" */
@@ -87,21 +66,6 @@
     --claro: #ffedcc; /* Light Apricot */
     --claro2: #ffcc99; /* Peach */
     
-    --oscuro: #ff6f61; /* Coral */
-    --oscuro2: #e74c3c; /* Red */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
-}
-
-/* Tema "Frío" */
-[data-theme="cold"] {
-    --claro: #d0e1f9; /* Light Sky Blue */
-    --claro2: #a6c8e0; /* Light Blue */
-    
-    --oscuro: #1b3a6d; /* Dark Blue */
-    --oscuro2: #4a90e2; /* Blue */
-    
-    --c-text-primary: var(--oscuro);
-    --c-text-secondary: var(--oscuro2);
+    --oscuro: #6e0000; /* Dark Red (más oscuro) */
+    --oscuro2: #b22222; /* Firebrick (sin cambios) */
 }

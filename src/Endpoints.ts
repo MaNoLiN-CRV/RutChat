@@ -34,10 +34,8 @@ export class CustomFileTransfer {
         });
 
         // CHAT PROTECTION
-
         this.app.get("/chat/*", this.validator.authenticateToken.bind(this.validator) , (req, res) => {
             const filePath = path.join(__dirname, '..', 'client' + req.path); 
-            console.log(filePath);
             if (fs.existsSync(filePath)){
                 res.sendFile(filePath)
             }
@@ -49,7 +47,7 @@ export class CustomFileTransfer {
  
         //POST FILE UPLOAD CONFIGURATION (Vlosty)
 
-        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator.authenticateToken, (req, res) => {
+        this.app.post(this.storage.getUploadPath(), this.upload.single("file"), this.validator.authenticateToken.bind(this.validator) , (req, res) => {
             if (!req.file) {
                 return res.status(400).send("Error uploading the file.");
             }
@@ -63,7 +61,7 @@ export class CustomFileTransfer {
         });
 
         // FILE UPLOAD FOLDER GET CONFIG
-        this.app.get(this.storage.getUploadPath() + ":filename", this.validator.authenticateToken ,(req, res) => {
+        this.app.get(this.storage.getUploadPath() + ":filename", this.validator.authenticateToken.bind(this.validator)  ,(req, res) => {
             const filePath = this.storage.getPublicFolder() + this.storage.getUploadPath();
             // If file exists
             if (fs.existsSync(filePath)) {
@@ -73,7 +71,7 @@ export class CustomFileTransfer {
             }
         });
 
-        // TEMPORAL LOGIN (will be deleted when the database is deployed)
+        // TEMPORAL LOGIN (will be deleted in nexts updates)
         this.app.post("/login", (req, res) => {
             const loginJson = req.body;
             const username = loginJson.username;

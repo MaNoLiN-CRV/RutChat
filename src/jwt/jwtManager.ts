@@ -28,13 +28,12 @@ export class jwtManager {
     const token = cookies.authToken; 
 
     if (!token) {
-        return res.status(401).send("SERVER BLOST SECURITY: NOT LOGGED IN :("); 
+        return res.status(401).send("SERVER BLOST SECURITY --> NOT LOGGED IN :("); 
     }
     jwt.verify(token, this.secretToken, (err: any, user: any) => {
         if (err) {
             return res.sendStatus(403);
         }
-        console.log("next");
         next();
     });
 }
