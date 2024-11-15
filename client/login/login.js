@@ -1,3 +1,4 @@
+import ChatClient from "../chat/client";
 class login {
   constructor() {
     console.log("INITIALIZED")
@@ -31,7 +32,10 @@ class login {
         .then((data) => {
           if (data.token != '') {
             // SAVES THE TOKEN
-            document.cookie = `authToken=${data.token}`; 
+            document.cookie = `authToken=${data.token}`;
+            // SETS THE USERNAME
+            ChatClient.username = username;
+
             // REDIRECT THE USER TO THE CHAT
             window.location.replace(window.location.origin + "/chat/chat.html");
           } else {

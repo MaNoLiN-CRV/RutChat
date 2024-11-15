@@ -1,9 +1,10 @@
 import {ClientSocket} from './ClientSocket.js'
 
 
-class ChatClient {
+export default class ChatClient {
+    static username = "bloste";
     constructor() {
-        this.ClientSocket = new ClientSocket("bloste");
+        this.ClientSocket = new ClientSocket(username);
         }
         
     }
