@@ -1,5 +1,5 @@
-import ChatClient from "../chat/client";
-class login {
+export default class Login {
+  static username = "bloste";
   constructor() {
     console.log("INITIALIZED")
     this.signInButton = document.getElementById("signIn");
@@ -34,7 +34,7 @@ class login {
             // SAVES THE TOKEN
             document.cookie = `authToken=${data.token}`;
             // SETS THE USERNAME
-            ChatClient.username = username;
+            Login.username = username;
 
             // REDIRECT THE USER TO THE CHAT
             window.location.replace(window.location.origin + "/chat/chat.html");
@@ -53,5 +53,5 @@ class login {
 }
 // INITIALIZES THE JS
 document.addEventListener("DOMContentLoaded", () => {
-    new login();
+    new Login();
 });

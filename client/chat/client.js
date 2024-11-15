@@ -1,10 +1,9 @@
 import {ClientSocket} from './ClientSocket.js'
-
+import Login from '../login/login.js';
 
 export default class ChatClient {
-    static username = "bloste";
     constructor() {
-        this.ClientSocket = new ClientSocket(username);
+        this.ClientSocket = new ClientSocket(Login.username);
         }
         
     }
